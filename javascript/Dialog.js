@@ -52,4 +52,18 @@ bootstrap.Dialog.prototype.createDom = function() {
     this.setBackgroundElementOpacity(this.backgroundElementOpacity_);
 };
 
-          
+/**
+ * @suppress {accessControls}
+ * @param {number} opacity
+ */
+bootstrap.Dialog.prototype.setBackgroundElementOpacity = function(opacity) {
+    this.backgroundElementOpacity_ = opacity;
+
+    if (this.getElement()) {
+        var bgEl = this.getBackgroundElement();
+        goog.dom.classes.add(bgEl, "modal-dialog-bg");
+        if (bgEl) {
+            goog.style.setOpacity(bgEl, this.backgroundElementOpacity_);
+        }
+    }
+};
