@@ -37,3 +37,5 @@ bootstrap.ButtonRenderer.prototype.getClassForState = function(state) {
 bootstrap.ButtonRenderer.prototype.getCssClass = function() {
   return bootstrap.ButtonRenderer.CSS_CLASS;
 };
+
+// TODO: override goog.ui.ButtonRenderer.prototype.setCollapsed = function(button, sides) - ensure the element is wrapped in a btn-group
