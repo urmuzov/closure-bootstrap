@@ -10,41 +10,42 @@ goog.require('bootstrap3.NavBarToggleRenderer');
 /**
  * <pre>
  *   <div class="navbar">
- *     <a class="navbar-brand" href="#">Title</a>
- *     <!--  <p class="navbar-text pull-right">
- *     		Signed in as 
- *     		<a href="#" class="navbar-link">Mark Otto</a>
- *     </p>
- *     <form class="navbar-form pull-left"></form>
- *     <button type="button" class="btn btn-default navbar-btn">Sign in</button>
- *      -->
- *     <ul class="nav navbar-nav">
- *       <li class="active"><a href="#">Home</a></li>
- *       <li><a href="#">Link</a></li>
- *       <li><a href="#">Link</a></li>
- *     </ul>     
+ *     <div class="container">
+ *       <a class="navbar-brand" href="#">Title</a>
+ *       <!--  <p class="navbar-text pull-right">Signed in as 
+ *     			<a href="#" class="navbar-link">Mark Otto</a>
+ *     	 </p>
+ *       <form class="navbar-form navbar-left">
+ *         <button type="button" class="btn btn-default">Sign in</button>
+ *       </form>
+ *       -->
+ *       <ul class="nav navbar-nav">
+ *         <li class="active"><a href="#">Home</a></li>
+ *         <li><a href="#">Link</a></li>
+ *         <li><a href="#">Link</a></li>
+ *       </ul>     
+ *     </div>
  *   </div>
  * </pre>
  * 
  * <pre>
  *   <div class="navbar">
- *     <div class="container">
- *       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+ *     <div class="navbar-header">
+ *       <button type="button" class="navbar-toggle">
  *         <span class="icon-bar"></span>
  *         <span class="icon-bar"></span>
  *         <span class="icon-bar"></span>
  *       </button>
- *       
  *       <a class="navbar-brand" href="#">Title</a>
+ *     </div>
  *       
- *       <div class="nav-collapse collapse navbar-responsive-collapse">
- *         <ul class="nav navbar-nav">
- *           <li class="active"><a href="#">Home</a></li>
- *           <li><a href="#">Link</a></li>
- *           <li><a href="#">Link</a></li>
- *         </ul>
- *       </div>
- *     </div>     
+ *     <div class="navbar-collapse collapse">
+ *       <ul class="nav navbar-nav">
+ *         <li class="active"><a href="#">Home</a></li>
+ *         <li><a href="#">Link</a></li>
+ *         <li><a href="#">Link</a></li>
+ *       </ul>
+ *     </div>
  *   </div>
  * </pre>
  * 
