@@ -1,7 +1,7 @@
 goog.provide('bootstrap3.NavBarToggle');
 
 goog.require('goog.ui.Button');
-goog.require('bootstrap3.NavBarRenderer');
+//goog.require('bootstrap3.NavBarRenderer');
 goog.require('goog.dom.classes');
 
 /**

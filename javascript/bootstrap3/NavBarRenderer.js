@@ -1,6 +1,6 @@
 goog.provide('bootstrap3.NavBarRenderer');
 
-goog.require('goog.a11y.aria.Role');
+//goog.require('goog.a11y.aria.Role');
 goog.require('goog.ui.ContainerRenderer');
 goog.require('goog.ui.Container.Orientation');
 goog.require('goog.ui.CustomButtonRenderer');
@@ -138,14 +138,14 @@ bootstrap3.NavBarRenderer.prototype.getClassNames = function(container) {
 	return classNames;
 };
 
-/**
- * Returns the ARIA role to be applied to toolbar/menubar.
- * @return {string} ARIA role.
- * @override
- */
-bootstrap3.NavBarRenderer.prototype.getAriaRole = function() {
-	return goog.a11y.aria.Role.NAVIGATION; //MENU, TOOLBAR;
-};
+///**
+// * Returns the ARIA role to be applied to toolbar/menubar.
+// * @return {string} ARIA role.
+// * @override
+// */
+//bootstrap3.NavBarRenderer.prototype.getAriaRole = function() {
+//	return goog.a11y.aria.Role.NAVIGATION; //MENU, TOOLBAR;
+//};
 
 bootstrap3.NavBarRenderer.prototype.decorateChildren = function(container, element, opt_firstChild) {
 	if (element) {

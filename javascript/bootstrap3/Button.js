@@ -1,20 +1,20 @@
 goog.provide('bootstrap3.Button');
 
 goog.require('goog.ui.Button');
-goog.require('bootstrap.ButtonRenderer');
+goog.require('bootstrap3.ButtonRenderer');
 
 /**
  * A button control, rendered as a native browser button styled with Twitter Bootstrap.
  * @see http://getbootstrap.com/css/#buttons
  *
  * @param {goog.ui.ControlContent} content Text caption or existing DOM structure to display as the button's caption.
- * @param {goog.ui.ButtonRenderer=} opt_renderer Renderer used to render or decorate the button; defaults to {@link bootstrap.ButtonRenderer}.
+ * @param {goog.ui.ButtonRenderer=} opt_renderer Renderer used to render or decorate the button; defaults to {@link bootstrap3.ButtonRenderer}.
  * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM hepler, used for document interaction.
  * @constructor
  * @extends {goog.ui.Button}
  */
 bootstrap3.Button = function(content, opt_renderer, opt_domHelper) {
-    goog.ui.Button.call(this, content, opt_renderer || bootstrap.ButtonRenderer.getInstance(), opt_domHelper)
+    goog.ui.Button.call(this, content, opt_renderer || bootstrap3.ButtonRenderer.getInstance(), opt_domHelper);
 };
 goog.inherits(bootstrap3.Button, goog.ui.Button);
 
@@ -34,13 +34,13 @@ bootstrap3.Button.Size = {
  * @enum {string}
  */
 bootstrap3.Button.Kind = {
-    DEFAULT: 'default',
-	PRIMARY: 'primary',
-	SUCCESS: 'success',
-    INFO: 'info',
-    WARNING: 'warning',
-    DANGER: 'danger',
-	LINK: 'link'
+    DEFAULT: 'btn-default',
+	PRIMARY: 'btn-primary',
+	SUCCESS: 'btn-success',
+    INFO: 'btn-info',
+    WARNING: 'btn-warning',
+    DANGER: 'btn-danger',
+	LINK: 'btn-link'
 };
 
 /**
