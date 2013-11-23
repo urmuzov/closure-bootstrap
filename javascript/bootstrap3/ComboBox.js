@@ -25,7 +25,9 @@ bootstrap3.ComboBox = function( opt_btn_class, opt_domHelper) {
 };
 goog.inherits(bootstrap3.ComboBox, goog.ui.ComboBox);
 
-bootstrap3.MenuItemRenderer.menuItemRenderer = new bootstrap3.MenuItemRenderer();
+bootstrap3.ComboBox.menuItemRenderer = new bootstrap3.MenuItemRenderer();
+
+bootstrap3.ComboBox.CLASS_NAME = 'input-group combobox';
 
 /**
  * Create the DOM objects needed for the combo box.  A span and text input.
@@ -44,13 +46,10 @@ bootstrap3.ComboBox.prototype.createDom = function() {
  * @param {Object=} opt_data Identifying data for the menu item.
  */
 bootstrap3.ComboBox.prototype.addItem = function( content, opt_data ) {
-	goog.ui.ComboBox.prototype.addItem.call( this,
-										new goog.ui.ComboBoxItem( content,
-																opt_data,
-																null,
-																bootstrap3.MenuItemRenderer.menuItemRenderer) );
+	var item = new goog.ui.ComboBoxItem( content, opt_data, null,
+										bootstrap3.ComboBox.menuItemRenderer );
+	goog.ui.ComboBox.prototype.addItem.call( this, item );
 };
-
 
 /**
  * Create the DOM objects needed for the combo box.  A span and text input.
@@ -61,15 +60,15 @@ bootstrap3.ComboBox.prototype.createDom = function() {
 	this.input_ = dom.createDom( 'input', {name: this.fieldName_, type: 'text', autocomplete: 'off'} );
 	this.button_ = dom.createDom('span', 'dropdown-toggle btn btn-' + this.btn_class);
 	var buttonWrapper = dom.createDom('span', 'input-group-btn', this.button_);
-	this.setElementInternal(dom.createDom('div', 'input-group combobox', this.input_,
+	this.setElementInternal(dom.createDom('div', bootstrap3.ComboBox.CLASS_NAME, this.input_,
 											//this.button_));
 											buttonWrapper));
-	if (this.useDropdownArrow_) {
+//	if (this.useDropdownArrow_) {
 		//this.button_.innerHTML = '&#x25BC;';
 		//goog.dom.classes.add(this.button_, 'glyphicon glyphicon-chevron-down');
 		this.button_.appendChild( dom.createDom('span', 'caret') );
 		goog.style.setUnselectable(this.button_, true /* unselectable */);
-	}
+//	}
 	this.input_.setAttribute('label', this.defaultText_);
 	this.labelInput_.decorate(this.input_);
 	goog.dom.classes.set( this.labelInput_.getElement(), 'form-control' );
