@@ -1,7 +1,8 @@
 About
 =====
 
-closure-bootstrap is a collection of Closure Library UI controls styled with [Twitter Bootstrap](https://github.com/twitter/bootstrap).
+closure-bootstrap is a collection of [Closure Library](http://code.google.com/closure/library)
+UI controls styled with [Twitter Bootstrap](https://github.com/twitter/bootstrap).
 
 This collection will be increased over time.
 
