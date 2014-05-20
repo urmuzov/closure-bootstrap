@@ -7,7 +7,7 @@ goog.require('bootstrap3.MenuItemRenderer');
 
 /**
  * A ComboBox styled with Twitter Bootstrap.
- * @see http://getbootstrap.com/css/#forms-controls
+ * @see http://getbootstrap3.com/css/#forms-controls
  *
  * @param {string} opt_btn_class - 'default', 'primary', 'success', 'info', 'warning', 'danger', 'link'
  *

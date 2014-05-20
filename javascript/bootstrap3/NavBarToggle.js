@@ -26,17 +26,18 @@ goog.inherits(bootstrap3.NavBarToggle, goog.ui.Button);
  * @type {HTMLElement|undefined}
  */
 bootstrap3.NavBarToggle.prototype.navCollapseEl;
+//bootstrap3.NavBarToggle.prototype.navToggleButton;
 
-/**
- * The only className expected is 'collapsed', but we need to negate the enable flag 
- * because Closure define 'OPENED' but Bootstrap use 'collapsed'
- */
-bootstrap3.NavBarToggle.prototype.enableClassName = function(control, className, enable) {
-	bootstrap3.NavBarToggle.superClass_.enableClassName.call(this, control, className, !enable);
-};
+///**
+// * The only className expected is 'collapsed', but we need to negate the enable flag
+// * because Closure define 'OPENED' but Bootstrap use 'collapsed'
+// */
+//bootstrap3.NavBarToggle.prototype.enableClassName = function(control, className, enable) {
+//	bootstrap3.NavBarToggle.superClass_.enableClassName.call(this, control, className, !enable);
+//};
 
-bootstrap3.NavBarToggle.prototype.setOpen = function(open) {
-	bootstrap3.NavBarToggle.superClass_.setOpen.call(this, open);
-	goog.dom.classes.enable( this.navCollapseEl, 'in', open );
-	goog.dom.classes.enable( this.navCollapseEl, 'collapse', !open );
-};
+//bootstrap3.NavBarToggle.prototype.setOpen = function(open) {
+//	bootstrap3.NavBarToggle.superClass_.setOpen.call(this, open);
+//	goog.dom.classes.enable( this.navCollapseEl, 'in', open );
+//	goog.dom.classes.enable( this.navCollapseEl, 'collapse', !open );
+//};

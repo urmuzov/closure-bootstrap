@@ -78,11 +78,11 @@ bootstrap3.NavBarToggleRenderer.prototype.decorate = function(navBarToggle, elem
 	return element;
 };
 
-/**
- * @inheritDoc
- */
+///**
+// * @inheritDoc
+// */
 bootstrap3.NavBarToggleRenderer.prototype.getClassForState = function(state) {
-	if( state == goog.ui.Component.State.OPENED ) {
+	if( state == goog.ui.Component.State.CLOSED ) {
 		return bootstrap3.NavBarToggleRenderer.COLLAPSED;
 	}
 };
@@ -101,8 +101,10 @@ bootstrap3.NavBarToggleRenderer.prototype.setState = function(navBarToggle, stat
 	if( state == goog.ui.Component.State.OPENED ) {
 		// when goog.ui.Component.State.OPENED, set the ".nav-collapse" element to "in"
 		goog.dom.classes.enable( navBarToggle.navCollapseEl, bootstrap3.NavBarToggleRenderer.OPEN, enable );
-		goog.dom.classes.enable( navBarToggle.navCollapseEl, bootstrap3.NavBarToggleRenderer.COLLAPSE, !enable );
+//		goog.dom.classes.enable( navBarToggle.navCollapseEl, bootstrap3.NavBarToggleRenderer.COLLAPSE, !enable );
+		goog.dom.classes.enable( navBarToggle.getElement(), bootstrap3.NavBarToggleRenderer.COLLAPSED, !enable );
 	}
+
 	bootstrap3.NavBarToggleRenderer.superClass_.setState.call(this, navBarToggle, state, enable);
 };
 

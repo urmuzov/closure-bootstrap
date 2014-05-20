@@ -63,21 +63,21 @@ module.exports = function(grunt) {
 				files: ['javascript/**/*.js'],
 				tasks: ['closure'],
 				options: { livereload: true }
-			},
-			test_html: {
-				files: ['test/**/*.html'],
-				tasks: ['copy:test_html'],
-				options: { livereload: true }
-			},
-			test: {
-				options: {
-					livereload: true
-				},
-				files: [
-					'javascript/**/*.js',
-					'test/**/*.js'
-				]
 			}
+//			test_html: {
+//				files: ['test/**/*.html'],
+//				tasks: ['copy:test_html'],
+//				options: { livereload: true }
+//			},
+//			test: {
+//				options: {
+//					livereload: true
+//				},
+//				files: [
+//					'javascript/**/*.js',
+//					'test/**/*.js'
+//				]
+//			}
 		},
 		// Start a connect web server on port 9000
 		// see: https://github.com/gruntjs/grunt-contrib-connect
@@ -185,64 +185,7 @@ module.exports = function(grunt) {
 				src: 'javascript/**/*',
 				dest: 'dist'
 			}
-
-//			dist: {
-//				files: [{
-//					expand: true,
-//					dot: true,
-//					cwd: '<%= yeoman.app %>',
-//					dest: '<%= yeoman.dist %>',
-//					src: [
-//						'*.{ico,png,txt}',
-//						'.htaccess',
-//						'images/{,*/}*.{webp,gif}',
-//						'styles/fonts/{,*/}*.*',
-//						'bower_components/sass-bootstrap/fonts/*.*'
-//					]
-//				}]
-//			},
-//			styles: {
-//				expand: true,
-//				dot: true,
-//				cwd: '<%= yeoman.app %>/styles',
-//				dest: '.tmp/styles/',
-//				src: '{,*/}*.css'
-//				options: {
-//					process: function (content, srcpath) {
-//						return content.replace(/[sad ]/g,"_");
-//					}
-//				}
-//			}
 		},
-
-		//
-		// Test tasks
-		// http://visionmedia.github.io/mocha/
-//		mocha: {
-//			all: {
-//				options: {
-//					run: true,
-//					ignoreLeaks: false,
-//					urls: [
-//						'http://localhost:<%= connect.test.options.port %>/test/index.html',
-//						'http://localhost:<%= connect.test.options.port %>/test/index.html?compiled=true',
-//						'http://localhost:<%= connect.test.options.port %>/test/index.html?unit=true'
-//					]
-//				}
-//			}
-//		},
-//		// Copied from https://github.com/ahabra/webappTemplate/blob/master/grunt.js
-//		jasmine : {
-//			src : gruntSupport.getVendorDependency().concat(['src/main/webapp/js/**/*.js']),
-//			specs : 'src/test/js/jasmine-specs/**/*_spec.js',
-//			timeout : 5000,
-//			junit : {
-//				output : 'target/jasmine/'
-//			},
-//			phantomjs : {
-//				'ignore-ssl-errors' : true
-//			}
-//		}
 
 		//
 		// Closure Tools Tasks
@@ -276,13 +219,12 @@ module.exports = function(grunt) {
 		closureBuilder: {
 			options: {
 				closureLibraryPath: '<%= closureConfig.closureLibrary %>',
-				//inputs: ['<%= closureConfig.jsSrcPath %>/<%= closureConfig.bootstrapFile %>'],
-				inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap3/Button.js'],
+				inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap3'],
 //				paths: '<%= closureConfig.closureLibrary %>',
 				compile: true,
 				compilerFile: compiler.getPath(),
 				compilerOpts: {
-					debug: true,
+//					debug: true,
 					js: [
 //						'<%= closureConfig.closureLibrary %>/closure/goog/deps.js',
 //						'<%= closureConfig.jsSrcPath %>/deps.js'
@@ -303,26 +245,23 @@ module.exports = function(grunt) {
 				}
 			},
 			test: {
-//				options: {
-//					compilerFile: compiler.getPath()
-////					compile: true
-//				},
+				options: {
+					compile: false,
+					compilerOpts: {
+						compilation_level: 'WHITESPACE_ONLY'
+//											'SIMPLE_OPTIMIZATIONS'
+//											'ADVANCED_OPTIMIZATIONS'
+					}
+				},
 				src: [
 					'<%= closureConfig.closureLibrary %>',
 					'<%= closureConfig.jsSrcPath %>'
-//					'<%= closureConfig.jsSrcPath %>/bootstrap'
-//					'<%= closureConfig.jsSrcPath %>/bootstrap3',
-//					'D:\\Nick\\workspace\\starjobs\\closure-bootstrap\\bower_components\\closure-library'
-
-//					'<%= closureConfig.closureLibrary %>/closure'
-//					'<%= closureConfig.closureLibrary %>/third_party'
-//					'<%= closureConfig.componentPath %>'
 				],
 				dest: 'test/js/<%= package.name %>.js'
 			},
 			dist: {
 				src: [
-					'<%= closureConfig.jsSrcPath %>/bootstrap',
+//					'<%= closureConfig.jsSrcPath %>/bootstrap',
 					'<%= closureConfig.jsSrcPath %>/bootstrap3',
 					'<%= closureConfig.closureLibrary %>/closure',
 					'<%= closureConfig.closureLibrary %>/third_party'
@@ -337,19 +276,6 @@ module.exports = function(grunt) {
 			dist: ['.delete-me', 'temp', 'dist'],
 			server: 'temp'
 		},
-//		uglify: {
-//			vendor: {
-//				files: {
-//					'temp/vendor.js': closureConfig.vendorFiles
-//				}
-//			}
-//		},
-//		concat: {
-//			production: {
-//				src: ['temp/vendor.js', 'temp/compiled.js'],
-//				dest: closureConfig.destCompiled
-//			}
-//		},
 
 		less: {
 			test: {
@@ -361,6 +287,7 @@ module.exports = function(grunt) {
 				files: {
 					"dist/css/closure-bootstrap.css": "less/_closure-bootstrap.less",
 					"dist/css/autocomplete.css": "less/autocomplete.less"
+//					"dist/css/navbar.css": "less/navbar.less"
 				}
 			},
 			dist: {
@@ -385,6 +312,7 @@ module.exports = function(grunt) {
 		'copy:test_html',
 		'copy:test_raw',
 		'connect:test',
+		'karma:dev:start',
 //		'open:test',
 		'watch'
 	]);

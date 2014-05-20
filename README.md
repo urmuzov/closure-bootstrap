@@ -1,38 +1,29 @@
-About
-=====
-
+# About
 closure-bootstrap is a collection of [Closure Library](http://code.google.com/closure/library)
 UI controls styled with [Twitter Bootstrap](https://github.com/twitter/bootstrap).
 
 This collection will be increased over time.
 
-Usage
-=====
-
+# Usage
 You need to link `bootstrap.css` to your page. Look at [Twitter Bootstrap page](http://twitter.github.com/bootstrap/) to find out how.
 
-Buttons
--------
-
-Rendering:
+## Buttons
+### Rendering:
 
     var button = new bootstrap.Button('Button Text');
     button.setSize(bootstrap.Button.Size.LARGE);
     button.setKind(bootstrap.Button.Kind.DANGER);
     button.render(goog.dom.getElement('button1'));
 
-Decorating:
-
+### Decorating:
 You need to use `button` tag with `class="btn"` like this:
 
     <button id="button2" class="btn">Button Text</button>
     ...
     var button = goog.ui.decorate(goog.dom.getElement('button2'));
 
-TabBars (Tabs and Pills)
-------------------------
-
-Rendering:
+## TabBars (Tabs and Pills)
+### Rendering:
 
     var tabs = new bootstrap.Tabs(); // or new bootstrap.Pills();
     tabs.addChild(new bootstrap.Tab('tab1'), true);
@@ -41,8 +32,7 @@ Rendering:
     tabs.setSelectedTabIndex(0);
     tabs.render(goog.dom.getElement('tabs1'));
 
-Decorating:
-
+### Decorating:
 You need to add class `tab` to all your tabs:
 
     <ul id="tabs2" class="tabs">
@@ -55,7 +45,14 @@ You need to add class `tab` to all your tabs:
     ...
     var tabs = goog.ui.decorate(goog.dom.getElement('tabs2'));
 
+# Tests
+## Installation
+<!-- The tests use [resemble](https://github.com/kpdecker/node-resemble) to compare screenshots.
+You may need to read the [canvas](https://github.com/LearnBoost/node-canvas) instructions if you
+have not previously installed `cairo` (GTK 2.X 32bit). -->
+`npm install -g phantomjs`
+`npm install -g casperjs`
 
-
-
-
+## Running the Tests
+<!-- `grunt karma:dev`, `grunt test-raw` or `karma start karma.conf.js` -->
+`node_modules\phantomcss\casperjs.bat test\screenshot-test.js`
