@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Closure Unit Tests - bootstrap3.ComboDatePicker</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+//		goog.require('goog.dom');
+//		goog.require('goog.dom.TagName');
+//		goog.require('goog.dom.classes');
+//		goog.require('goog.events');
+//		goog.require('goog.ui.ControlRenderer');
+//		goog.require('goog.ui.Component');
+//		goog.require('goog.ui.ComboBox');
+		goog.require('bootstrap3.ComboDatePicker');
+	</script>
+
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style>
+		#comboContainer1, #comboContainer2 {
+			margin: auto;
+			padding: 20px 10px;
+			width: 320px;
+			height: 290px;
+		}
+		#comboContainer2 {
+			/*margin-bottom: 160px; */
+
+		}
+	</style>
+</head>
+<body>
+	<div id="comboContainer1" class="form-group date">
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+			<input type="date" name="date1" class="form-control" value="2014-05-21" placeholder="dd/mm/yyyy">
+		</div>
+	</div>
+	<div id="comboContainer2" class="form-group date">
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+			<input type="text" name="date2" class="form-control" value="2014-05-21" placeholder="dd/mm/yyyy">
+		</div>
+	</div>
+	<div id="comboContainer3" class="form-group date"></div>
+	<script>
+	var testComboDatePicker = function() {
+		var container1 = goog.dom.getElement('comboContainer1');
+		var datePicker1 = new bootstrap3.ComboDatePicker();
+		datePicker1.decorate(container1.getElementsByTagName('input')[0]);
+		goog.global['datePicker1'] = datePicker1;
+
+		var container2 = goog.dom.getElement('comboContainer2');
+		var datePicker2 = new bootstrap3.ComboDatePicker();
+		datePicker2.decorate(container2.getElementsByTagName('input')[0]);
+		goog.global['datePicker2'] = datePicker2;
+
+// render is not currently supported
+//		var container3 = goog.dom.getElement('comboContainer3');
+//		var datePicker3 = new bootstrap3.ComboDatePicker();
+//		datePicker3.render(container3);
+//		goog.global['datePicker3'] = datePicker3;
+	};
+	</script>
+</body>
+</html>

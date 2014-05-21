@@ -7,6 +7,7 @@ var phantomcss = require('../node_modules/phantomcss/phantomcss.js');
 var casper = require('../node_modules/phantomcss/CasperJs/modules/casper.js').create({
 	viewportSize: {width: 800, height: 600}
 });
+var x = require('../node_modules/phantomcss/CasperJs/modules/casper.js').selectXPath;
 
 phantomcss.init({
   screenshotRoot: './screenshots',
@@ -68,6 +69,28 @@ casper.then(function(){
 	casper.click('#topNavBar .navbar-toggle');
 	casper.waitForSelector('#topNavBar .navbar-collapse.in');
 	phantomcss.screenshot('#topNavBar', 'narrow top nav bar down');
+});
+
+// ========== Combo Date Picker ==========
+casper.thenOpen( './test/ComboDatePicker_test.html' );
+casper.then(function(){
+	this.viewport(400,400);
+	phantomcss.screenshot('#comboContainer1', 'date provided');
+});
+casper.then(function(){
+	casper.click('#comboContainer1 .form-control #picker'); //::-webkit-calendar-picker-indicator');
+	phantomcss.screenshot('#comboContainer1', 'built-in date control');
+});
+casper.then(function(){
+	casper.click(x('//div[@id="comboContainer2"]/div/input[@type="text"]')); // # input[type="text"]');
+	phantomcss.screenshot('#comboContainer2', 'date picker');
+});
+casper.then(function(){
+	var input = x('//div[@id="comboContainer2"]/div/input[@type="text"]');
+	casper.click(input);
+	casper.clear(input);
+	casper.sendKeys(input,'32/03/2015');
+	phantomcss.screenshot('#comboContainer2', 'date validation');
 });
 
 //
