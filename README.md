@@ -23,13 +23,13 @@ You need to use `button` tag with `class="btn"` like this:
     var button = goog.ui.decorate(goog.dom.getElement('button2'));
 
 ## ComboBox
-![ComboBox](screenshots/empty+combo+box_1.png "Filtering ComboBox")
+![ComboBox](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/empty+combo+box_1.png "Filtering ComboBox")
 
 ## Date Pickers
-![Date Picker](screenshots/date+picker_6.png "Date Picker")
+![Date Picker](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/date+picker_6.png "Date Picker")
 
 ## NavBars
-![Expanded NavBar](screenshots/narrow+top+nav+bar+down_4.png "Expanded NavBar")
+![Expanded NavBar](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/narrow+top+nav+bar+down_4.png "Expanded NavBar")
 
 ## TabBars (Tabs and Pills)
 ### Rendering:
