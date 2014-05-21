@@ -22,6 +22,15 @@ You need to use `button` tag with `class="btn"` like this:
     ...
     var button = goog.ui.decorate(goog.dom.getElement('button2'));
 
+## ComboBox
+![ComboBox](screenshots/empty+combo+box_1.png "Filtering ComboBox")
+
+## Date Pickers
+![Date Picker](screenshots/date+picker_6.png "Date Picker")
+
+## NavBars
+![Expanded NavBar](screenshots/narrow+top+nav+bar+down_4.png "Expanded NavBar")
+
 ## TabBars (Tabs and Pills)
 ### Rendering:
 
@@ -44,6 +53,8 @@ You need to add class `tab` to all your tabs:
     </ul>
     ...
     var tabs = goog.ui.decorate(goog.dom.getElement('tabs2'));
+
+
 
 # Tests
 ## Installation
