@@ -31,12 +31,23 @@ bootstrap3.TextAreaForm = function( value, opt_domHelper ) {
 };
 goog.inherits(bootstrap3.TextAreaForm, goog.ui.Component);
 
+/**
+ * @type {string}
+ * @private
+ */
+this.previousValue;
+
 
 bootstrap3.TextAreaForm.prototype.enterDocument = function() {
 	var _this = this,
 		form = /** @type{HTMLFormElement) */(this.getElement());
 	this.textarea = form.getElementsByTagName('textarea')[0]; // goog.dom.getElementsByTagNameAndClass( 'textarea', null, form );
-
+	if( goog.isDef( this.value ) ) {
+		this.textarea.value = this.value;
+	} else {
+		this.value = this.textarea.value;
+	}
+	this.previousValue = this.value;
 
 	this.getHandler()
 		.listen( this.textarea,
@@ -45,9 +56,13 @@ bootstrap3.TextAreaForm.prototype.enterDocument = function() {
 				this.onFocus, false, this )
 //		.listen( this.textarea, goog.ui.Component.EventType.BLUR, this.onFocus, false, this )
 		.listen( goog.dom.getElementByClass('btn-danger', form),
-				goog.events.EventType.CLICK, this.onFocus, false, this )
+				goog.events.EventType.CLICK, function(event) {
+			this.value = this.textarea.value = this.previousValue;
+			this.onFocus(event);
+		}, false, this )
 		.listen( goog.dom.getElementByClass('btn-success', form),
 				goog.events.EventType.CLICK, function(event) {
+			this.previousValue = this.textarea.value;
 			var name = this.textarea.name; //  getAttribute('name')
 			var value = goog.string.urlEncode( this.textarea.value );
 			var url = form.action;
@@ -64,7 +79,7 @@ bootstrap3.TextAreaForm.prototype.enterDocument = function() {
  */
 bootstrap3.TextAreaForm.prototype.onFocus = function(event) {
 	var form = this.getElement();
-	console.info(event);
+//	this.previousValue = this.value;
 	//event.preventDefault();
 	goog.dom.classes.enable( form, 'focus', event.type == goog.ui.Component.EventType.FOCUS );
 };
