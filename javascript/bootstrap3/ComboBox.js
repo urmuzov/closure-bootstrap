@@ -71,10 +71,25 @@ bootstrap3.ComboBox.prototype.createDom = function() {
 //	}
 	this.input_.setAttribute('label', this.defaultText_);
 	this.labelInput_.decorate(this.input_);
+	if( goog.isDef(this.fieldName_) ) {
+		this.input_.name = this.fieldName_;
+	}
 	goog.dom.classes.set( this.labelInput_.getElement(), 'form-control' );
 	this.menu_.setFocusable(false);
 	if (!this.menu_.isInDocument()) {
 		this.addChild(this.menu_, true);
+	}
+};
+
+/**
+ * Sets the 'name' attribute of the input element
+ * @param fieldName
+ */
+bootstrap3.ComboBox.prototype.setFieldName = function(fieldName) {
+	goog.base(this, 'setFieldName');
+
+	if( this.isInDocument() ) {
+		this.input_.name = fieldName;
 	}
 };
 
