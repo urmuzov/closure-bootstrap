@@ -20,6 +20,7 @@
   },
   "ignore": [
     ".gitignore",
-    "test"
+    "test",
+	"Gruntfile.js"
   ]
 }
