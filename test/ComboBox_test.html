@@ -20,21 +20,35 @@
 	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 	<style>
-		#comboContainer { margin: auto; padding: 20px 50px 80px; width: 260px; }
+		.comboContainer { margin: auto; padding: 20px 50px 80px; width: 260px; }
 	</style>
 </head>
 <body>
-	<div id="comboContainer"></div>
+	<div id="comboContainer1" class="comboContainer"></div>
+	<div id="comboContainer2" class="comboContainer"></div>
 	<script>
 	var testComboBox = function() {
-		var container = goog.dom.getElement('comboContainer');
-		var comboBox = new bootstrap3.ComboBox('primary');
-		comboBox.setUseDropdownArrow(true);
-		comboBox.addItem( 'Value 1', 'val-1' );
-		comboBox.addItem( 'Value 2', 'val-2' );
+		var container1 = goog.dom.getElement('comboContainer1');
+		var comboBox1 = new bootstrap3.ComboBox('primary');
+		comboBox1.setUseDropdownArrow(true);
+		comboBox1.addItem( 'Value 1', 'val-1' );
+		comboBox1.addItem( 'Value 2', 'val-2' );
+		comboBox1.setFieldName('combo-1');
 
-		comboBox.render(container);
-		goog.global['comboBox'] = comboBox;
+		comboBox1.render(container1);
+		goog.global['comboBox1'] = comboBox1;
+
+		var container2 = goog.dom.getElement('comboContainer2');
+		var comboBox2 = new bootstrap3.ComboBox('warning');
+		comboBox2.setUseDropdownArrow(false);
+		comboBox2.addItem( 'Value 1', 'val-1' );
+		comboBox2.addItem( 'Value 2', 'val-2' );
+		comboBox2.setFieldName('combo-2');
+
+		comboBox2.render(container2);
+		comboBox2.setValue('Disabled');
+		comboBox2.setEnabled(false);
+		goog.global['comboBox2'] = comboBox2;
 	};
 	</script>
 </body>

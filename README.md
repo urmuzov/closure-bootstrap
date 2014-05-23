@@ -22,16 +22,140 @@ You need to use `button` tag with `class="btn"` like this:
     ...
     var button = goog.ui.decorate(goog.dom.getElement('button2'));
 
+
 ## ComboBox
+Bootstrap-themed implementation of `goog.ui.ComboBox` using Bootstrap's `dropdown-menu`.
 ![ComboBox](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/empty combo box_1.png "Filtering ComboBox")
 
-## Date Pickers
+### Rendering:
+Render into any element:
+
+    var container1 = ;
+    // Constructor takes optional Bootstrap modifier classes:
+    // 'default', 'primary', 'success', 'info', 'warning', 'danger', 'link'
+    var combo = new bootstrap3.ComboBox( 'primary' );
+    combo.addItem( 'Value 1', 'val-1' );
+    combo.addItem( 'Value 2', 'val-2' );
+    combo.setFieldName( 'combo-1' );
+    combo.render( goog.dom.getElement('comboContainer') );
+
+    combo.setValue('Disabled');
+    combo.setEnabled(false);
+
+### Decorating:
+Not yet supported
+
+
+## Date Picker
+A `goog.ui.Component` that provides date validation and a calendar using `goog.ui.DatePicker`.
+- If you use `<input type="date">` and the browser provides its own implementation, this class will delegate to the
+browser's implementation.
+- If you use `<input type="text">` (or the browser does not provide a `date` implementation) this class will provide
+a pop-up date picker.
 ![Date Picker](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/date%20picker_6.png "Date Picker")
 
+### Rendering:
+Not yet supported (but would be trivial to implement)
+
+### Decorating:
+Provide the following DOM structure to decorate:
+
+    <div id="dateContainer" class="form-group date">
+  		<div class="input-group">
+    		<span class="input-group-addon glyphicon glyphicon-calendar"></span>
+    		<input type="date" name="date" class="form-control" value="2014-05-21" placeholder="dd/mm/yyyy">
+    	</div>
+    </div>
+	<script>
+        var container = goog.dom.getElement('dateContainer');
+		var datePicker = new bootstrap3.ComboDatePicker();
+		datePicker.decorate(container.getElementsByTagName('input')[0]);
+	</script>
+
+
+## Time Picker
+A subclass of `bootstrap3.ComboBox` that validates times and can optionally be paired with another
+time picker to display the time span between the two times.
+![Time Picker validation](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/time%20picker%20validation.png "Time Picker validation")
+![Time Picker time span](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/time%20picker%20span.png "Time Picker time spans")
+
+### Rendering:
+
+	<div id="startTime"></div>
+    <span class="to">to</span>
+    <div id="endTime">
+    <script>
+        // start, end, optional default time
+        var timePicker1 = new bootstrap3.TimePicker('09:00', '17:00', '12:15');
+        timePicker1.render(goog.dom.getElement('startTime'));
+        timePicker1.setFieldName('start');
+
+		// start, end, optional default time and reference time picker
+        var timePicker2 = new bootstrap3.TimePicker('09:00', '17:00', '13:00', timePicker1);
+        timePicker2.render(goog.dom.getElement('endTime'));
+        timePicker2.setFieldName('end');
+    </script>
+
+### Decorating:
+Not yet supported
+
+
+## Text Area Form
+A simple form with a text area and cancel/save buttons that collapse when not focussed
+![Text Area Form](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/text%20area%20form.png "Text Area Form")
+
+### Rendering:
+Not yet supported
+
+### Decorating:
+
+    <form id="form" class="textarea-form focus">
+    	<textarea class="form-control" rows="1" placeholder="Add a note...">The "focus" class forces the form into edit mode</textarea>
+    	<div class="form-group">
+    		<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
+    		<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
+    	</div>
+    </form>
+    <script>
+        var form = new bootstrap3.TextAreaForm(); // 'Value can also be set at run-time');
+        form.decorate( goog.dom.getElement('form') );
+    </script>
+
 ## NavBars
+NavBar UI component styled with Twitter Bootstrap.  A toggle button expands/collapses the menu (small screens only).
 ![Expanded NavBar](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/narrow%20top%20nav%20bar%20down_4.png "Expanded NavBar")
 
-## TabBars (Tabs and Pills)
+### Rendering:
+Not supported
+
+### Decorating:
+    <nav id="topNavBar" class="navbar navbar-default">
+    	<div class="container">
+    		<div class="navbar-header">
+    			<button type="button" class="navbar-toggle">
+    				<span class="sr-only">Toggle navigation</span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    				<span class="icon-bar"></span>
+    			</button>
+    			<a class="navbar-brand" href="#">Brand</a>
+    		</div>
+    		<div class="collapse navbar-collapse">
+    			<ul class="nav navbar-nav navbar-right">
+    				<li class="active"><a href="#">Home</a></li>
+    				<li><a href="#">Link</a></li>
+    				<li><a href="#">Link</a></li>
+    			</ul>
+    		</div>
+    	</div>
+    </nav>
+    <script>
+        var topNavBar = new bootstrap3.NavBar();
+    	topNavBar.decorate( goog.dom.getElement('topNavBar') );
+    </script>
+
+
+## TabBar (Tabs and Pills)
 ### Rendering:
 
     var tabs = new bootstrap.Tabs(); // or new bootstrap.Pills();

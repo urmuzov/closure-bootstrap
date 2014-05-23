@@ -77,56 +77,44 @@ casper.then(function(){
 	this.viewport(400,400);
 	phantomcss.screenshot('#comboContainer1', 'date provided');
 });
+	//casper.then(function(){
+	//	casper.click('#comboContainer1 .form-control #picker'); //::-webkit-calendar-picker-indicator');
+	//	phantomcss.screenshot('#comboContainer1', 'built-in date control');
+	//});
 casper.then(function(){
-	casper.click('#comboContainer1 .form-control #picker'); //::-webkit-calendar-picker-indicator');
-	phantomcss.screenshot('#comboContainer1', 'built-in date control');
-});
-casper.then(function(){
+//	casper.click(x('//div[@id="comboContainer2"]'));
+//	casper.click(x('//div[@id="comboContainer2"]/div'));
 	casper.click(x('//div[@id="comboContainer2"]/div/input[@type="text"]')); // # input[type="text"]');
 	phantomcss.screenshot('#comboContainer2', 'date picker');
 });
 casper.then(function(){
+//	casper.waitForSelector('div#comboContainer2');
+//	casper.waitForSelector('#comboContainer2 div');
+//	casper.waitForSelector('#comboContainer2 div input');
+//	casper.waitForSelector('#comboContainer2 input');
+//	casper.waitForSelector('#comboContainer2 input[type="text"]');
+
+	var selector = 'div#comboContainer2 div input.form-control';
+//	casper.waitForSelector(selector);
 	var input = x('//div[@id="comboContainer2"]/div/input[@type="text"]');
-	casper.click(input);
-	casper.clear(input);
-	casper.sendKeys(input,'32/03/2015');
+//	casper.click(input);
+	casper.clear(selector); //input);
+//	casper.sendKeys(input, '32/03/2015');
+	casper.sendKeys(selector, '32/03/2015');
 	phantomcss.screenshot('#comboContainer2', 'date validation');
 });
 
-//
-//casper.then(function(){
-//	casper.click('#coffee-machine-button');
-//
-//	// wait for modal to fade-in
-//	casper.waitForSelector('#myModal:not([style*="display: none"])',
-//		function success(){
-//			phantomcss.screenshot('#myModal', 'coffee machine dialog');
-//		},
-//		function timeout(){
-//			casper.test.fail('Should see coffee machine');
-//		}
-//	);
-//});
-//
-//casper.then(function(){
-//	casper.click('#cappuccino-button');
-//	phantomcss.screenshot('#myModal', 'cappuccino success');
-//});
-//
-//casper.then(function(){
-//	casper.click('#close');
-//
-//	// wait for modal to fade-out
-//	casper.waitForSelector('#myModal[style*="display: none"]',
-//		function success(){
-//			phantomcss.screenshot('#coffee-machine-wrapper', 'coffee machine close success');
-//		},
-//		function timeout(){
-//			casper.test.fail('Should be able to walk away from the coffee machine');
-//		}
-//	);
-//});
+// ========== Text Area Form ==========
 
+// ========== Time Picker ==========
+casper.thenOpen( './test/TimePicker_test.html' );
+casper.then(function(){
+	this.viewport(400,400);
+	casper.sendKeys('#startTime input', '1200');
+	phantomcss.screenshot('#startTime', 'time validation');
+});
+
+// ========== Compare Screenshots ==========
 casper.then( function now_check_the_screenshots(){
 	// compare screenshots
 	phantomcss.compareAll();
