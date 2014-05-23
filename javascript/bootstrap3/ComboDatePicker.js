@@ -1,7 +1,10 @@
 goog.provide('bootstrap3.ComboDatePicker');
 
+goog.require('goog.events.InputHandler');
 goog.require('goog.ui.Component');
 goog.require('goog.ui.DatePicker');
+
+goog.require('bootstrap3.utils');
 
 /**
  * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper.
@@ -47,13 +50,18 @@ bootstrap3.ComboDatePicker.prototype.decorateInternal = function(element) {
 	this.valueInput_ = element;
 	if( element.type != 'date' ) {
 		// Older browser that does not support HTML "date" input control
+		// To get the round corners where we want them, we need:
+		// - .input-group
+		//   - .input-group-addon.glyphicon.glyphicon-calendar
+		//   - 'drowdownWrapper':.dropdown or 'element':<input type="hidden"
+		//   - <input type="text"
 		var dom = this.getDomHelper();
 //		element.autocomplete = 'off';
 
 		this.dropdownPanel = dom.createDom('div', 'dropdown-panel');
 		this.dropdownWrapper = dom.createDom( 'div', 'dropdown', this.dropdownPanel );
 		dom.replaceNode( this.dropdownWrapper, element );
-		this.dropdownWrapper.appendChild( element ); // insertBefore( element, this.dropDownPanel );
+		this.dropdownWrapper.parentNode.appendChild( element ); // insertBefore( element, this.dropDownPanel );
 
 		// create a "hidden" element to hold the wire value, so that the visible input control
 		// can be used to display & edit the value in a non-ISO format
@@ -64,7 +72,8 @@ bootstrap3.ComboDatePicker.prototype.decorateInternal = function(element) {
 				'placeholder': element.placeholder,
 				'value': element.value.substr(8) + '/' + element.value.substr(5,2) + '/' + element.value.substr(0,4)
 			});
-		this.dropdownWrapper.insertBefore(this.labelInput_, element);
+
+		this.dropdownWrapper.parentNode.appendChild(this.labelInput_); //this.dropdownWrapper.insertBefore(this.labelInput_, element);
 
 		this.datePicker = new goog.ui.DatePicker();
 		this.datePicker.setUseSimpleNavigationMenu(true);
@@ -129,8 +138,8 @@ bootstrap3.ComboDatePicker.prototype.getValue = function() {
  * @param {goog.events.Event} e
  */
 bootstrap3.ComboDatePicker.prototype.clickOutOfCalendar = function(e) {
-	var outOfWrapper = jobapp.utils.checkMouseOut(e, this.dropdownWrapper);
-	var outOfPanel = jobapp.utils.checkMouseOut(e, this.dropdownPanel);
+	var outOfWrapper = bootstrap3.utils.checkMouseOut(e, this.dropdownWrapper.parentNode);
+	var outOfPanel = bootstrap3.utils.checkMouseOut(e, this.dropdownPanel);
 	if( outOfWrapper && outOfPanel ) {
 		this.showCalendar(false);
 	}
@@ -141,7 +150,7 @@ bootstrap3.ComboDatePicker.prototype.clickOutOfCalendar = function(e) {
  */
 bootstrap3.ComboDatePicker.prototype.showCalendar = function(show) {
 	if( show.type == 'blur' ) {
-		var mouseOut = jobapp.utils.checkMouseOut( show, this.datePicker.getElement() );
+		var mouseOut = bootstrap3.utils.checkMouseOut( show, this.datePicker.getElement() );
 		show = !mouseOut;
 	} else {
 		show = !!show;
