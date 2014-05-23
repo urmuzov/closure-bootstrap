@@ -52,6 +52,7 @@ A `goog.ui.Component` that provides date validation and a calendar using `goog.u
 browser's implementation.
 - If you use `<input type="text">` (or the browser does not provide a `date` implementation) this class will provide
 a pop-up date picker.
+
 ![Date Picker](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/date%20picker_6.png "Date Picker")
 
 ### Rendering:
@@ -76,6 +77,7 @@ Provide the following DOM structure to decorate:
 ## Time Picker
 A subclass of `bootstrap3.ComboBox` that validates times and can optionally be paired with another
 time picker to display the time span between the two times.
+
 ![Time Picker validation](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/time%20picker%20validation.png "Time Picker validation")
 ![Time Picker time span](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/time%20picker%20span.png "Time Picker time spans")
 
@@ -101,7 +103,8 @@ Not yet supported
 
 
 ## Text Area Form
-A simple form with a text area and cancel/save buttons that collapse when not focussed
+A simple form with a text area and cancel/save buttons that collapse when not focused
+
 ![Text Area Form](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/text%20area%20form.png "Text Area Form")
 
 ### Rendering:
@@ -123,6 +126,7 @@ Not yet supported
 
 ## NavBars
 NavBar UI component styled with Twitter Bootstrap.  A toggle button expands/collapses the menu (small screens only).
+
 ![Expanded NavBar](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/narrow%20top%20nav%20bar%20down_4.png "Expanded NavBar")
 
 ### Rendering:
