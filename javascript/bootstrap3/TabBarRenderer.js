@@ -1,7 +1,7 @@
 goog.provide('bootstrap3.TabBarRenderer');
 
 goog.require('goog.ui.TabBarRenderer');
-
+goog.require('bootstrap3.TabRenderer');
 
 /**
  * Renderer for {@link goog.ui.TabBar}s, based on the {@code goog.ui.TabBarRenderer} code.
@@ -18,7 +18,7 @@ bootstrap3.TabBarRenderer = function() {
 	goog.ui.TabBarRenderer.call(this);
 };
 goog.inherits(bootstrap3.TabBarRenderer, goog.ui.TabBarRenderer);
-//goog.addSingletonGetter(bootstrap3.TabBarRenderer);
+goog.addSingletonGetter(bootstrap3.TabBarRenderer);
 
 /**
  * Default CSS class to be applied to the root element of components rendered

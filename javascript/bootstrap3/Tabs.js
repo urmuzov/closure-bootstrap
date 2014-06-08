@@ -129,7 +129,7 @@ bootstrap3.Tabs.prototype.decorateInternal = function(element) {
 
 	var tabBarEl = goog.dom.getFirstElementChild(element),
 		tabElements_ = /** @type {Array.<HTMLLIElement>} */
-			goog.dom.getElementsByTagNameAndClass('li', undefined, tabBarEl);
+			(goog.dom.getElementsByTagNameAndClass('li', undefined, tabBarEl));
 
 	tabBarEl.className = 'nav nav-tabs';
 //	goog.ui.registry.setDecoratorByClassName( 'tab',

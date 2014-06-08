@@ -1,6 +1,6 @@
 goog.provide('bootstrap3.TabRenderer');
 
-goog.require('bootstrap3.TabBarRenderer');
+goog.require('goog.ui.TabRenderer');
 
 /**
  * Rounded corner tab renderer for {@link goog.ui.Tab}s.

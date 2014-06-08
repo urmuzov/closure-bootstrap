@@ -81,11 +81,11 @@ bootstrap3.NavBarToggleRenderer.prototype.decorate = function(navBarToggle, elem
 ///**
 // * @inheritDoc
 // */
-bootstrap3.NavBarToggleRenderer.prototype.getClassForState = function(state) {
-	if( state == goog.ui.Component.State.CLOSED ) {
-		return bootstrap3.NavBarToggleRenderer.COLLAPSED;
-	}
-};
+//bootstrap3.NavBarToggleRenderer.prototype.getClassForState = function(state) {
+//	if( state == goog.ui.Component.State.CLOSED ) {
+//		return bootstrap3.NavBarToggleRenderer.COLLAPSED;
+//	}
+//};
 
 /**
  * @inheritDoc
