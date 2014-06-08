@@ -246,6 +246,8 @@ module.exports = function(grunt) {
 			},
 			test: {
 				options: {
+					inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap2',
+						'<%= closureConfig.jsSrcPath %>/bootstrap3'],
 					compile: false,
 					compilerOpts: {
 						compilation_level: 'WHITESPACE_ONLY'

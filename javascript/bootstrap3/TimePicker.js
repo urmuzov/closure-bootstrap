@@ -57,6 +57,7 @@ bootstrap3.TimePicker.prototype.enterDocument = function() {
 	this.resetClasses();
 };
 
+
 /**
  * @param {string=} opt_extra_class
  */
