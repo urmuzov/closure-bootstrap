@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Dialog Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.Dialog');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+		.container {
+			width:  400px;
+			padding: 25px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<form id="form1" class="textarea-form focus">
+		<textarea class="form-control" rows="1" placeholder="Add a note...">The "focus" class forces the form into edit mode</textarea>
+		<div class="form-group">
+			<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
+			<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
+		</div>
+	</form>
+</div>
+
+<script>
+	var dialog, events = [];
+
+	function logEvent(event) {
+		console.info( event );
+		events.push( event );
+	}
+
+	function setUp() {
+		dialog = new bootstrap3.Dialog();
+		dialog.setTitle('Dialog Test');
+		dialog.setContent('Hello World!');
+		dialog.setEscapeToCancel(true);
+
+		var buttons = new goog.ui.Dialog.ButtonSet();
+		buttons.addButton( {caption: 'Cancel', key: 'c'}, false, true );
+		buttons.addButton( {caption: 'Apply', key: 'a'} );
+		buttons.addButton( {caption: 'OK', key: 'o'}, true );
+		dialog.setButtonSet( buttons );
+
+		dialog.addEventListener( goog.ui.PopupBase.EventType.HIDE, logEvent );
+		goog.events.listen( dialog, goog.ui.Dialog.EventType.SELECT, logEvent );
+//		function(e) {
+//			this.logger_.fine('clicked button ' + e.key);
+//			dialog.setVisible( false );
+//		});
+	}
+
+	function tearDown() {
+	}
+
+	function testRenderDialog() {
+		var dlgElement = dialog.getDialogElement(),
+			bgElement = dialog.getBackgroundElement(),
+			element = dialog.getElement();
+
+		assertEquals( 'modal-dialog', dlgElement.className );
+		assertEquals( 'modal-backdrop fade', bgElement.className );
+		assertEquals( bgElement, element );
+
+		dialog.setVisible( true );
+		assertEquals( 'modal fade in', bgElement.className );
+
+//		dialog.setVisible( false );
+//		assertEquals( 'modal fade', bgElement.className );
+	}
+</script>
+</body>
+</html>
