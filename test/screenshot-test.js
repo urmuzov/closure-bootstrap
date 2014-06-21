@@ -106,10 +106,18 @@ casper.then(function(){
 
 // ========== Text Area Form ==========
 
+// ========== Dialog ==========
+casper.thenOpen( './test/Dialog_test.html' );
+casper.then(function(){
+	this.viewport(800,370);
+	casper.waitForSelector('#:0Label');
+	phantomcss.screenshot('.container', 'dialog');
+});
+
 // ========== Time Picker ==========
 casper.thenOpen( './test/TimePicker_test.html' );
 casper.then(function(){
-	this.viewport(400,400);
+	this.viewport(400,300);
 	casper.sendKeys('#startTime input', '1200');
 	phantomcss.screenshot('#startTime', 'time validation');
 });

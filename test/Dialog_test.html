@@ -14,34 +14,51 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 	<style type="text/css">
 		.container {
-			width:  400px;
+			width:  350px;
+			height:  370px;
 			padding: 25px;
+			text-align: center;
+		}
+		div.form-group:last-child {
+			margin-bottom: 0;
 		}
 	</style>
 </head>
 <body>
 <div class="container">
-	<form id="form1" class="textarea-form focus">
-		<textarea class="form-control" rows="1" placeholder="Add a note...">The "focus" class forces the form into edit mode</textarea>
-		<div class="form-group">
-			<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
-			<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
-		</div>
-	</form>
+	<a href="#" class="btn btn-success"
+	   id="dlgButton"
+	   data-toggle="modal"
+	   data-target="#basicModal">Click to open the Dialog</a>
 </div>
 
 <script>
-	var dialog, events = [];
+	var dialog, events = [], CANCEL = 'c', APPLY = 'a', OK = 'o';
 
 	function logEvent(event) {
 		console.info( event );
 		events.push( event );
+		if( APPLY == event.key ) {
+			event.preventDefault();
+		}
 	}
 
 	function setUp() {
-		dialog = new bootstrap3.Dialog();
-		dialog.setTitle('Dialog Test');
-		dialog.setContent('Hello World!');
+		dialog = new bootstrap3.Dialog('modal-sm');
+		dialog.setTitle('Bootstrap-Style Dialog');
+		dialog.setContent('<form>' +
+				'<div class="form-group">' +
+					'<label for="email">Email address</label>' +
+					'<input type="email" class="form-control" id="email" placeholder="Enter email">' +
+				'</div>' +
+				'<div class="form-group">' +
+					'<label for="password">Password</label>' +
+					'<input type="password" class="form-control" id="password" placeholder="Password">' +
+				'</div>' +
+//				'<div class="checkbox">' +
+//					'<label><input type="checkbox">Weekly emails</input></label>' +
+//				'</div>' +
+				'</form>');
 		dialog.setEscapeToCancel(true);
 
 		var buttons = new goog.ui.Dialog.ButtonSet();
@@ -50,6 +67,9 @@
 		buttons.addButton( {caption: 'OK', key: 'o'}, true );
 		dialog.setButtonSet( buttons );
 
+		goog.events.listen( goog.dom.getElement('dlgButton'), goog.events.EventType.CLICK, function() {
+			dialog.setVisible(true);
+		});
 		dialog.addEventListener( goog.ui.PopupBase.EventType.HIDE, logEvent );
 		goog.events.listen( dialog, goog.ui.Dialog.EventType.SELECT, logEvent );
 //		function(e) {
@@ -66,12 +86,13 @@
 			bgElement = dialog.getBackgroundElement(),
 			element = dialog.getElement();
 
-		assertEquals( 'modal-dialog', dlgElement.className );
+		assertEquals( 'modal-dialog modal-sm', dlgElement.className );
 		assertEquals( 'modal-backdrop fade', bgElement.className );
-		assertEquals( bgElement, element );
+		assertEquals( 'modal fade', element.className );
 
 		dialog.setVisible( true );
-		assertEquals( 'modal fade in', bgElement.className );
+		assertEquals( 'modal-backdrop fade in', bgElement.className );
+		assertEquals( 'modal fade in', element.className );
 
 //		dialog.setVisible( false );
 //		assertEquals( 'modal fade', bgElement.className );

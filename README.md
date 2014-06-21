@@ -74,6 +74,17 @@ Provide the following DOM structure to decorate:
 	</script>
 
 
+## Dialog
+A modal, draggable `goog.ui.Dialog`.
+
+![Dialog](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/dialog_5.png "Dialog")
+
+### Rendering:
+Not yet supported (but would be trivial to implement)
+
+### Decorating:
+
+
 ## Time Picker
 A subclass of `bootstrap3.ComboBox` that validates times and can optionally be paired with another
 time picker to display the time span between the two times.
