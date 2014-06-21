@@ -219,7 +219,7 @@ module.exports = function(grunt) {
 		closureBuilder: {
 			options: {
 				closureLibraryPath: '<%= closureConfig.closureLibrary %>',
-				inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap3'],
+				inputs: ['<%= closureConfig.jsSrcPath %>\bootstrap3'],
 //				paths: '<%= closureConfig.closureLibrary %>',
 				compile: true,
 				compilerFile: compiler.getPath(),
@@ -246,8 +246,8 @@ module.exports = function(grunt) {
 			},
 			test: {
 				options: {
-					inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap2',
-						'<%= closureConfig.jsSrcPath %>/bootstrap3'],
+					inputs: ['<%= closureConfig.jsSrcPath %>\bootstrap',
+						'<%= closureConfig.jsSrcPath %>\bootstrap3'],
 					compile: false,
 					compilerOpts: {
 						compilation_level: 'WHITESPACE_ONLY'
@@ -264,7 +264,7 @@ module.exports = function(grunt) {
 			dist: {
 				src: [
 //					'<%= closureConfig.jsSrcPath %>/bootstrap',
-					'<%= closureConfig.jsSrcPath %>/bootstrap3',
+					'<%= closureConfig.jsSrcPath %>\bootstrap3',
 					'<%= closureConfig.closureLibrary %>/closure',
 					'<%= closureConfig.closureLibrary %>/third_party'
 //					'<%= closureConfig.componentPath %>'
