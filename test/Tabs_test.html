@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Tab Bar Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap.Tabs');
+		goog.require('bootstrap.Tab');
+		goog.require('bootstrap.Pills');
+		goog.require('bootstrap.Pill');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+.container {
+	margin: 20px;
+}
+	</style>
+</head>
+<body>
+	<div id="tabs" class="container"></div>
+	<div id="pills" class="container"></div>
+
+<script>
+var tabs, pills;
+
+function setUp() {
+	tabs = new bootstrap.Tabs();
+	pills = new bootstrap.Pills();
+}
+
+function tearDown() {
+}
+
+function testDecorateNavBar() {
+	tabs.addChild(new bootstrap.Tab('tab1'), true);
+	tabs.addChild(new bootstrap.Tab('tab2'), true);
+	tabs.addChild(new bootstrap.Tab('tab3'), true);
+	tabs.setSelectedTabIndex(0);
+	tabs.render(goog.dom.getElement('tabs'));
+
+	pills.addChild(new bootstrap.Tab('pill1'), true);
+	pills.addChild(new bootstrap.Tab('pill2'), true);
+	pills.addChild(new bootstrap.Tab('pill3'), true);
+	pills.setSelectedTabIndex(0);
+	pills.render(goog.dom.getElement('pills'));
+}
+</script>
+</body>
+</html>

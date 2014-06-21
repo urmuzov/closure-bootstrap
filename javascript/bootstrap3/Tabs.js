@@ -1,7 +1,7 @@
 goog.provide('bootstrap3.Tabs');
 
 goog.require('bootstrap3.TabBarRenderer');
-goog.require('bootstrap3.TabsRenderer');
+goog.require('bootstrap3.TabRenderer');
 
 goog.require('goog.dom');
 goog.require('goog.events.EventTarget');
