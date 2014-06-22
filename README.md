@@ -80,10 +80,27 @@ A modal, draggable `goog.ui.Dialog`.
 ![Dialog](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/dialog_5.png "Dialog")
 
 ### Rendering:
-Not yet supported (but would be trivial to implement)
+	dialog = new bootstrap3.Dialog('modal-sm');
+	dialog.setTitle('Bootstrap-Style Dialog');
+	dialog.setContent('<form>' +
+					'<div class="form-group">' +
+						'<label for="email">Email address</label>' +
+						'<input type="email" class="form-control" id="email" placeholder="Enter email">' +
+					'</div>' /* ...(or use a soy template) */ );
+	dialog.setEscapeToCancel(true);
+
+	var buttons = new goog.ui.Dialog.ButtonSet();
+	buttons.addButton( {caption: 'Cancel', key: 'c'}, false, true );
+	buttons.addButton( {caption: 'Apply', key: 'a'} );
+	buttons.addButton( {caption: 'OK', key: 'o'}, true );
+	dialog.setButtonSet( buttons );
+
+	goog.events.listen( dialog, goog.ui.Dialog.EventType.SELECT, function(event) {} );
+
+	dialog.setVisible( true );
 
 ### Decorating:
-
+Not yet supported (but would be trivial to implement)
 
 ## Time Picker
 A subclass of `bootstrap3.ComboBox` that validates times and can optionally be paired with another
