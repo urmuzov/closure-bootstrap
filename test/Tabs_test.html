@@ -8,10 +8,9 @@
 	<script>
 		goog.require('goog.testing.jsunit');
 		goog.require('goog.testing.events');
-		goog.require('bootstrap.Tabs');
-		goog.require('bootstrap.Tab');
-		goog.require('bootstrap.Pills');
-		goog.require('bootstrap.Pill');
+		goog.require('bootstrap3.Tabs');
+		goog.require('bootstrap3.Tab');
+		goog.require('bootstrap3.Pills');
 	</script>
 	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -22,33 +21,230 @@
 	</style>
 </head>
 <body>
-	<div id="tabs" class="container"></div>
-	<div id="pills" class="container"></div>
+	<input type="hidden" id="history_state" value="{'tab-index':'#rPane1','d-tab-index':'#tabPane1','tab-index-justified':2}"/>
 
+	<h2>Rendered</h2>
+	<h3>Tabs</h3>
+	<div id="r-tabs" class="container"></div>
+	<div id="r-tabsStacked" class="container"></div>
+	<div id="r-tabsJustified" class="container"></div>
+
+	<h3>Pills</h3>
+	<div id="r-pills" class="container"></div>
+	<div id="r-pillsStacked" class="container"></div>
+	<div id="r-pillsStacked2" class="container"></div>
+	<div id="r-pillsJustified" class="container"></div>
+
+	<hr>
+	<h2>Decorated</h2>
+	<h3>Tabs</h3>
+	<div class="container">
+		<ul id="d-tabs" class="nav nav-tabs">
+			<li class="active">
+				<a href="#tabPane1" data-toggle="tab">Decorated Tab 1</a>
+			</li>
+			<li><a href="#tabPane2" data-toggle="tab">Tab 2</a></li>
+			<li><a href="#tabPane3">Tab 3</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					Dropdown <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#dropDownPane1" data-toggle="tab">Option 1</a></li>
+					<li><a href="#dropDownPane2" data-toggle="tab">Option 2</a></li>
+				</ul>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="tabPane1" class="tab-pane fade in active">
+				Pane 1
+			</div>
+			<div id="tabPane2" class="tab-pane fade">
+				Pane 2
+			</div>
+			<div id="tabPane3" class="tab-pane fade">
+				Pane 3
+			</div>
+			<div id="dropDownPane1" class="tab-pane fade">
+				Drop down pane 1
+			</div>
+			<div id="dropDownPane2" class="tab-pane fade">
+				Drop down pane 2
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<ul id="d-tabsStacked" class="nav nav-tabs nav-stacked col-md-2">
+			<li class="active">
+				<a href="#stackedTabPane1" data-toggle="tab">Decorated Tab 1</a>
+			</li>
+			<li><a href="#stackedTabPane2" data-toggle="tab">Stacked Tab 2</a></li>
+			<li><a href="#stackedTabPane3" data-toggle="tab">Tab 3</a></li>
+		</ul>
+		<div class="tab-content col-md-10">
+			<div id="stackedTabPane1" class="tab-pane fade in active">
+				Pane 1
+			</div>
+			<div id="stackedTabPane2" class="tab-pane fade">
+				Pane 2
+			</div>
+			<div id="stackedTabPane3" class="tab-pane fade">
+				Pane 3
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<ul id="d-tabsJustified" class="nav nav-tabs nav-justified">
+			<li class="active"><a href="#">Decorated Tab 1</a></li>
+			<li><a href="#">Justified Tab 2</a></li>
+			<li><a href="#">Tab 3</a></li>
+		</ul>
+	</div>
+
+	<h3>Pills</h3>
+	<div class="container">
+		<ul id="d-pills" class="nav nav-pills">
+			<li class="active"><a href="#pillPane1">Decorated Pill 1</a></li>
+			<li><a href="#pillPane2">Horizontal Pill 2</a></li>
+			<li><a href="#pillPane3">Pill 3</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="pillPane1" class="tab-pane fade in active">
+				Pill pane 1
+			</div>
+			<div id="pillPane2" class="tab-pane fade">
+				Pill pane 2
+			</div>
+			<div id="pillPane3" class="tab-pane fade">
+				Pill pane 3
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<ul id="d-pillsStacked" class="nav nav-pills nav-stacked col-md-2">
+			<li class="active"><a href="#stackedPillPane1">Decorated pill 1</a></li>
+			<li><a href="#stackedPillPane2">Stacked Pill 2</a></li>
+			<li><a href="#stackedPillPane3">Pill 3</a></li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					Dropdown <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#dropDownPillPane1" data-toggle="tab">Option 1</a></li>
+					<li><a href="#dropDownPillPane2" data-toggle="tab">Option 2</a></li>
+				</ul>
+			</li>
+		</ul>
+		<div class="tab-content col-md-10">
+			<div id="stackedPillPane1" class="tab-pane fade in active">
+				Pill pane 1
+			</div>
+			<div id="stackedPillPane2" class="tab-pane fade">
+				Pill pane 2
+			</div>
+			<div id="stackedPillPane3" class="tab-pane fade">
+				Pill pane 3
+			</div>
+			<div id="dropDownPillPane1" class="tab-pane fade">
+				Drop down pill pane 1
+			</div>
+			<div id="dropDownPillPane2" class="tab-pane fade">
+				Drop down pill pane 2
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<ul id="d-pillsJustified" class="nav nav-pills nav-justified">
+			<li class="active"><a href="#">Decorated pill 1</a></li>
+			<li><a href="#">Justified Pill 2</a></li>
+			<li><a href="#">Pill 3</a></li>
+		</ul>
+	</div>
 <script>
-var tabs, pills;
+var tabs, tabsStacked, tabsJustified,
+	pills, pillsStacked, pillsStacked2, pillsJustified,
+	dtabs, dpills, dpillsStacked;
 
 function setUp() {
-	tabs = new bootstrap.Tabs();
-	pills = new bootstrap.Pills();
+	var cookies = new goog.net.Cookies(document);
+	cookies.set('tab-index', '2');
+
+	rtabs = new bootstrap3.Tabs('tab-index');
+	rtabsStacked = new bootstrap3.Tabs('tab-index-stacked', 'nav-stacked');
+	rtabsJustified = new bootstrap3.Tabs('tab-index-justified', 'nav-justified');
+
+	rpills = new bootstrap3.Pills();
+	rpillsStacked = new bootstrap3.Pills();
+	rpillsStacked.setStacked(true);
+	rpillsStacked2 = new bootstrap3.Pills('pill-index-stacked', 'nav-stacked');
+	rpillsJustified = new bootstrap3.Pills('pill-index-justified', 'nav-justified');
+
+	dtabs = new bootstrap3.Tabs();
+	dpills = new bootstrap3.Pills();
+	dpillsStacked = new bootstrap3.Pills();
 }
 
 function tearDown() {
 }
 
-function testDecorateNavBar() {
-	tabs.addChild(new bootstrap.Tab('tab1'), true);
-	tabs.addChild(new bootstrap.Tab('tab2'), true);
-	tabs.addChild(new bootstrap.Tab('tab3'), true);
-	tabs.setSelectedTabIndex(0);
-	tabs.render(goog.dom.getElement('tabs'));
-
-	pills.addChild(new bootstrap.Tab('pill1'), true);
-	pills.addChild(new bootstrap.Tab('pill2'), true);
-	pills.addChild(new bootstrap.Tab('pill3'), true);
-	pills.setSelectedTabIndex(0);
-	pills.render(goog.dom.getElement('pills'));
+var STATIC_TAB_CONTENT = 'This pane was provided as a string';
+function generateTabPaneContent(tab, href) {
+	return '<h4>' + tab.getCaption() + '</h4>' +
+			'<p>This pane was provided by a function.</p>' +
+			'href: ' + href;
 }
+
+// ---- Rendered Tabs ----
+function testRenderTabBar() {
+	rtabs.addChild('Rendered Tab 1', '#rPane1', generateTabPaneContent);
+	rtabs.addChild('Tab 2', 'tabs/pane2');
+	rtabs.addChild('Tab 3', '#rPane3', STATIC_TAB_CONTENT);
+	rtabs.setSelectedTabIndex(0);
+	rtabs.render(goog.dom.getElement('r-tabs'));
+}
+
+function testRenderStackedTabBar() {
+	rtabsStacked.addChild('Rendered Tab 1', '#rStackedPane1', STATIC_TAB_CONTENT);
+	rtabsStacked.addChild('Stacked Tab 2', 'tabs/pane2');
+	rtabsStacked.addChild('Tab 3', '#rStackedPane3', generateTabPaneContent);
+	rtabsStacked.render(goog.dom.getElement('r-tabsStacked'));
+}
+
+function testRenderJustifiedTabBar() {
+	rtabsJustified.addChild('Rendered Tab 1', '#rJustifiedPane1', STATIC_TAB_CONTENT);
+	rtabsJustified.addChild('Justified Tab 2', 'tabs/pane2');
+	rtabsJustified.addChild('Tab 3', '#rJustifiedPane3', generateTabPaneContent);
+	rtabsJustified.render(goog.dom.getElement('r-tabsJustified'));
+}
+
+// ---- Rendered Pills ----
+function testRenderPills() {
+	rpills.addChild('Rendered Pill 1', '#rJustifiedPillPane1', STATIC_TAB_CONTENT);
+	rpills.addChild('Horizontal Pill 2', 'tabs/pane2');
+	rpills.addChild('Pill 3', '#rJustifiedPillPane3', generateTabPaneContent);
+	rpills.setSelectedTabIndex(0);
+	rpills.render(goog.dom.getElement('r-pills'));
+}
+
+function testRenderStackedPills() {
+	rpillsStacked.addChild('Rendered Pill 1', '#rStackedPillPane1', STATIC_TAB_CONTENT);
+	rpillsStacked.addChild('Stacked 2', 'tabs/pane2');
+	rpillsStacked.addChild('Pill 3', '#rStackedPillPane3', generateTabPaneContent);
+	rpillsStacked.setSelectedTabIndex(0);
+	rpillsStacked.render(goog.dom.getElement('r-pillsStacked'));
+}
+
+//function testDecorateNavBar() {
+//	dtabs.decorate(goog.dom.getElement('d-tabs'));
+//}
+//
+//function testDecoratePills() {
+//	dpills.decorate(goog.dom.getElement('d-pills'));
+//}
+//
+//function testDecorateStackedPills() {
+//	dpillsStacked.decorate(goog.dom.getElement('d-pillsStacked'));
+//}
 </script>
 </body>
 </html>

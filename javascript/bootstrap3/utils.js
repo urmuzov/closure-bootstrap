@@ -15,3 +15,16 @@ bootstrap3.utils.checkMouseOut = function( event, element ) {
 	}
 	return true;
 };
+
+/**
+ * @param {Element} element
+ * @return {number}
+ */
+bootstrap3.utils.indexOfElementWithinParent = function( element ) {
+	var index = 0;
+	while( element ) {
+		element = goog.dom.getPreviousElementSibling( element );
+		index++;
+	}
+	return index;
+};

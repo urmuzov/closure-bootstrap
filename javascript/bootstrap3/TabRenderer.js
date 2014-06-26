@@ -44,6 +44,25 @@ bootstrap3.TabRenderer.prototype.getCssClass = function() {
 	return bootstrap3.TabRenderer.CSS_CLASS;
 };
 
+bootstrap3.TabRenderer.prototype.createDom = function(tab) {
+	var dom = tab.getDomHelper(),
+		element = dom.createDom('li',
+								tab.isActive() ? 'active' :
+									!tab.isEnabled() ? 'disabled' : null,
+								dom.createDom('a', {'href':tab.getHref()},
+									tab.getCaption()));
+
+	this.setAriaStates(tab, element);
+
+	var tooltip = tab.getTooltip();
+	if (tooltip) {
+		// Only update the element if the tab has a tooltip.
+		this.setTooltip(element, tooltip);
+	}
+
+	return element;
+};
+
 /**
  * Updates the appearance of the control in response to a state change.
  * @param {goog.ui.Control} control Control instance to update.
@@ -61,10 +80,11 @@ bootstrap3.TabRenderer.prototype.setState = function(control, state, enable) {
 //		}
 //		this.enableClassName( control, 'ui-tabs-selected', enable );
 			if( enable ) {
-				var tabBar = control.getParent(),
-					tabs = tabBar.getParent();
+				var tabBar = control.getParent();
+//					tabs = tabBar.getParent();
 				//bootstrap3.Tabs.logger_.info('selected tab, calling doSelectTab_(), ', control, ', tabBar: ', tabBar);
-				tabs.doSelectTab_( control );
+				//tabs.doSelectTab_( control );
+
 				//goog.style.showElement( goog.dom.getElement( href.getFragment() ), enable );
 			}
 			break;

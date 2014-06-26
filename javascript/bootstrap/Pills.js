@@ -14,3 +14,4 @@ bootstrap.Pills = function(opt_renderer, opt_domHelper) {
     goog.ui.TabBar.call(this, goog.ui.TabBar.Location.TOP, opt_renderer || bootstrap.PillsRenderer.getInstance(), opt_domHelper)
 };
 goog.inherits(bootstrap.Pills, goog.ui.TabBar);
+

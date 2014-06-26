@@ -25,7 +25,7 @@ goog.addSingletonGetter(bootstrap3.TabBarRenderer);
  * by this renderer.
  * @type {string}
  */
-bootstrap3.TabBarRenderer.CSS_CLASS = goog.getCssName('nav');
+bootstrap3.TabBarRenderer.CSS_CLASS = 'nav';
 
 
 /**
@@ -38,9 +38,46 @@ bootstrap3.TabBarRenderer.prototype.getCssClass = function() {
 	return bootstrap3.TabBarRenderer.CSS_CLASS;
 };
 
-bootstrap3.TabBarRenderer.prototype.createDom = function(container) {
-	return container.getDomHelper().createDom('ul',
-		this.getClassNames(container).join(' '));
+///**
+// * Creates the location-to-class lookup table.
+// * @private
+// */
+//bootstrap3.TabBarRenderer.prototype.createClassByLocationMap_ = function() {
+//	/**
+//	 * Map of locations to location-specific structural class names,
+//	 * precomputed and cached on first use to minimize object allocations
+//	 * and string concatenation.
+//	 * @type {Object}
+//	 * @private
+//	 */
+//	this.classByLocation_ = goog.object.create(
+////		goog.ui.TabBar.Location.TOP, goog.getCssName(baseClass, 'top'),
+////		goog.ui.TabBar.Location.BOTTOM, goog.getCssName(baseClass, 'bottom'),
+//		goog.ui.TabBar.Location.START, 'nav-stacked', //goog.getCssName(baseClass, 'start'),
+//		goog.ui.TabBar.Location.END, 'nav-stacked'); //goog.getCssName(baseClass, 'end'));
+//};
+
+/**
+ * @param {goog.ui.TabBar}
+ */
+bootstrap3.TabBarRenderer.prototype.getClassNames = function(tabBar) {
+	var classNames = ['nav', 'nav-tabs'];
+	if( tabBar.getOrientation() == goog.ui.Container.Orientation.VERTICAL ) {
+		classNames.push('nav-stacked');
+		classNames.push('col-sm-2');
+	}
+//	if (!tabBar.isEnabled()) {
+//		classNames.push('disabled');
+//	}
+	return classNames;
+};
+
+bootstrap3.TabBarRenderer.prototype.createDom = function(tabBar) {
+	var element = tabBar.getDomHelper().createDom('ul',
+		this.getClassNames(tabBar).join(' '));
+
+//	goog.dom.setFocusableTabIndex(element, false);
+	return element;
 };
 
 /**
@@ -56,7 +93,7 @@ bootstrap3.TabBarRenderer.prototype.canDecorate = function(element) {
 
 bootstrap3.TabBarRenderer.prototype.getDecoratorForChild = function(element) {
 	if( element.tagName == 'LI' ) {
-		return new goog.ui.Tab(null, bootstrap3.TabRenderer.getInstance());
+		return new bootstrap3.Tab(element.innerHTML, bootstrap3.TabRenderer.getInstance());
 	} else {
 		goog.ui.registry.getDecorator(element);
 	}
