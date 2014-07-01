@@ -13,7 +13,7 @@
 		goog.require('bootstrap3.Pills');
 	</script>
 	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+<!--	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/> -->
 	<style type="text/css">
 .container {
 	margin: 20px;
@@ -95,10 +95,21 @@
 	</div>
 	<div class="container">
 		<ul id="d-tabsJustified" class="nav nav-tabs nav-justified">
-			<li class="active"><a href="#">Decorated Tab 1</a></li>
-			<li><a href="#">Justified Tab 2</a></li>
-			<li><a href="#">Tab 3</a></li>
+			<li class="active"><a href="#justifiedPane1">Decorated Tab 1</a></li>
+			<li><a href="#justifiedPane2">Justified Tab 2</a></li>
+			<li><a href="#justifiedPane3">Tab 3</a></li>
 		</ul>
+		<div class="tab-content">
+			<div id="justifiedPane1" class="tab-pane fade in active">
+				Pill pane 1
+			</div>
+			<div id="justifiedPane2" class="tab-pane fade">
+				Pill pane 2
+			</div>
+			<div id="justifiedPane3" class="tab-pane fade">
+				Pill pane 3
+			</div>
+		</div>
 	</div>
 
 	<h3>Pills</h3>
@@ -155,33 +166,49 @@
 	</div>
 	<div class="container">
 		<ul id="d-pillsJustified" class="nav nav-pills nav-justified">
-			<li class="active"><a href="#">Decorated pill 1</a></li>
-			<li><a href="#">Justified Pill 2</a></li>
-			<li><a href="#">Pill 3</a></li>
+			<li class="active"><a href="#justifiedPillPane1">Decorated pill 1</a></li>
+			<li><a href="#justifiedPillPane2">Justified Pill 2</a></li>
+			<li><a href="#justifiedPillPane3">Pill 3</a></li>
 		</ul>
+		<div class="tab-content col-md-10">
+			<div id="justifiedPillPane1" class="tab-pane fade in active">
+				Pill pane 1
+			</div>
+			<div id="justifiedPillPane2" class="tab-pane fade">
+				Pill pane 2
+			</div>
+			<div id="justifiedPillPane3" class="tab-pane fade">
+				Pill pane 3
+			</div>
+		</div>
 	</div>
 <script>
-var tabs, tabsStacked, tabsJustified,
-	pills, pillsStacked, pillsStacked2, pillsJustified,
-	dtabs, dpills, dpillsStacked;
+var rTabs, rTabsStacked, rTabsJustified,
+	rPills, rPillsStacked, rPillsStacked2, rPillsJustified,
+	dTabs, dTabsStacked, dTabsJustified,
+	dPills, dPillsStacked, dPillsJustified;
 
 function setUp() {
 	var cookies = new goog.net.Cookies(document);
 	cookies.set('tab-index', '2');
 
-	rtabs = new bootstrap3.Tabs('tab-index');
-	rtabsStacked = new bootstrap3.Tabs('tab-index-stacked', 'nav-stacked');
-	rtabsJustified = new bootstrap3.Tabs('tab-index-justified', 'nav-justified');
+	rTabs = new bootstrap3.Tabs('tab-index');
+	rTabsStacked = new bootstrap3.Tabs('tab-index-stacked', 'nav-stacked');
+	rTabsJustified = new bootstrap3.Tabs('tab-index-justified', 'nav-justified');
 
-	rpills = new bootstrap3.Pills();
-	rpillsStacked = new bootstrap3.Pills();
-	rpillsStacked.setStacked(true);
-	rpillsStacked2 = new bootstrap3.Pills('pill-index-stacked', 'nav-stacked');
-	rpillsJustified = new bootstrap3.Pills('pill-index-justified', 'nav-justified');
+	rPills = new bootstrap3.Pills();
+	rPillsStacked = new bootstrap3.Pills();
+	rPillsStacked.setStacked(true);
+	rPillsStacked2 = new bootstrap3.Pills('pill-index-stacked', 'nav-stacked');
+	rPillsJustified = new bootstrap3.Pills('pill-index-justified', 'nav-justified');
 
-	dtabs = new bootstrap3.Tabs();
-	dpills = new bootstrap3.Pills();
-	dpillsStacked = new bootstrap3.Pills();
+	dTabs = new bootstrap3.Tabs();
+	dTabsStacked = new bootstrap3.Tabs();
+	dTabsJustified = new bootstrap3.Tabs();
+
+	dPills = new bootstrap3.Pills();
+	dPillsStacked = new bootstrap3.Pills();
+	dPillsJustified = new bootstrap3.Pills();
 }
 
 function tearDown() {
@@ -196,55 +223,69 @@ function generateTabPaneContent(tab, href) {
 
 // ---- Rendered Tabs ----
 function testRenderTabBar() {
-	rtabs.addChild('Rendered Tab 1', '#rPane1', generateTabPaneContent);
-	rtabs.addChild('Tab 2', 'tabs/pane2');
-	rtabs.addChild('Tab 3', '#rPane3', STATIC_TAB_CONTENT);
-	rtabs.setSelectedTabIndex(0);
-	rtabs.render(goog.dom.getElement('r-tabs'));
+	rTabs.addChild('Rendered Tab 1', '#rPane1', generateTabPaneContent);
+	rTabs.addChild('Tab 2', 'tabs/pane2');
+	rTabs.addChild('Tab 3', '#rPane3', STATIC_TAB_CONTENT);
+	rTabs.setSelectedTabIndex(0);
+	rTabs.render(goog.dom.getElement('r-tabs'));
 }
 
 function testRenderStackedTabBar() {
-	rtabsStacked.addChild('Rendered Tab 1', '#rStackedPane1', STATIC_TAB_CONTENT);
-	rtabsStacked.addChild('Stacked Tab 2', 'tabs/pane2');
-	rtabsStacked.addChild('Tab 3', '#rStackedPane3', generateTabPaneContent);
-	rtabsStacked.render(goog.dom.getElement('r-tabsStacked'));
+	rTabsStacked.addChild('Rendered Tab 1', '#rStackedPane1', STATIC_TAB_CONTENT);
+	rTabsStacked.addChild('Stacked Tab 2', 'tabs/pane2');
+	rTabsStacked.addChild('Tab 3', '#rStackedPane3', generateTabPaneContent);
+	rTabsStacked.render(goog.dom.getElement('r-tabsStacked'));
 }
 
 function testRenderJustifiedTabBar() {
-	rtabsJustified.addChild('Rendered Tab 1', '#rJustifiedPane1', STATIC_TAB_CONTENT);
-	rtabsJustified.addChild('Justified Tab 2', 'tabs/pane2');
-	rtabsJustified.addChild('Tab 3', '#rJustifiedPane3', generateTabPaneContent);
-	rtabsJustified.render(goog.dom.getElement('r-tabsJustified'));
+	rTabsJustified.addChild('Rendered Tab 1', '#rJustifiedPane1', STATIC_TAB_CONTENT);
+	rTabsJustified.addChild('Justified Tab 2', 'tabs/pane2');
+	rTabsJustified.addChild('Tab 3', '#rJustifiedPane3', generateTabPaneContent);
+	rTabsJustified.render(goog.dom.getElement('r-tabsJustified'));
 }
 
 // ---- Rendered Pills ----
 function testRenderPills() {
-	rpills.addChild('Rendered Pill 1', '#rJustifiedPillPane1', STATIC_TAB_CONTENT);
-	rpills.addChild('Horizontal Pill 2', 'tabs/pane2');
-	rpills.addChild('Pill 3', '#rJustifiedPillPane3', generateTabPaneContent);
-	rpills.setSelectedTabIndex(0);
-	rpills.render(goog.dom.getElement('r-pills'));
+	rPills.addChild('Rendered Pill 1', '#rJustifiedPillPane1', STATIC_TAB_CONTENT);
+	rPills.addChild('Horizontal Pill 2', 'tabs/pane2');
+	rPills.addChild('Pill 3', '#rJustifiedPillPane3', generateTabPaneContent);
+	rPills.setSelectedTabIndex(0);
+	rPills.render(goog.dom.getElement('r-pills'));
 }
 
 function testRenderStackedPills() {
-	rpillsStacked.addChild('Rendered Pill 1', '#rStackedPillPane1', STATIC_TAB_CONTENT);
-	rpillsStacked.addChild('Stacked 2', 'tabs/pane2');
-	rpillsStacked.addChild('Pill 3', '#rStackedPillPane3', generateTabPaneContent);
-	rpillsStacked.setSelectedTabIndex(0);
-	rpillsStacked.render(goog.dom.getElement('r-pillsStacked'));
+	rPillsStacked.addChild('Rendered Pill 1', '#rStackedPillPane1', STATIC_TAB_CONTENT);
+	rPillsStacked.addChild('Stacked 2', 'tabs/pane2');
+	rPillsStacked.addChild('Pill 3', '#rStackedPillPane3', generateTabPaneContent);
+	rPillsStacked.setSelectedTabIndex(0);
+	rPillsStacked.render(goog.dom.getElement('r-pillsStacked'));
 }
 
-//function testDecorateNavBar() {
-//	dtabs.decorate(goog.dom.getElement('d-tabs'));
-//}
-//
-//function testDecoratePills() {
-//	dpills.decorate(goog.dom.getElement('d-pills'));
-//}
-//
-//function testDecorateStackedPills() {
-//	dpillsStacked.decorate(goog.dom.getElement('d-pillsStacked'));
-//}
+// ---- Decorated Tabs ----
+function testDecorateTabs() {
+	dTabs.decorate(goog.dom.getElement('d-tabs'));
+}
+
+function testDecorateStackedTabs() {
+	dTabsStacked.decorate(goog.dom.getElement('d-tabsStacked'));
+}
+
+function testDecorateJustifiedTabs() {
+	dTabsJustified.decorate(goog.dom.getElement('d-tabsJustified'));
+}
+
+// ---- Decorated Pills ----
+function testDecoratePills() {
+	dPills.decorate(goog.dom.getElement('d-pills'));
+}
+
+function testDecorateStackedPills() {
+	dPillsStacked.decorate(goog.dom.getElement('d-pillsStacked'));
+}
+
+function testDecorateJustifiedPills() {
+	dPillsJustified.decorate(goog.dom.getElement('d-pillsJustified'));
+}
 </script>
 </body>
 </html>

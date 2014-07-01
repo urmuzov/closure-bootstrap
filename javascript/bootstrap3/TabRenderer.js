@@ -60,6 +60,13 @@ bootstrap3.TabRenderer.prototype.createDom = function(tab) {
 		this.setTooltip(element, tooltip);
 	}
 
+	element.firstElementChild.tabIndex = -1;
+	return element;
+};
+
+bootstrap3.TabRenderer.prototype.decorate = function(tab, element) {
+	element = bootstrap3.TabRenderer.superClass_.decorate.call(this, tab, element);
+	element.firstElementChild.tabIndex = -1;
 	return element;
 };
 

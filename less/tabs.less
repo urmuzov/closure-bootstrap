@@ -1,0 +1,60 @@
+.nav-tabs, .nav-pills {
+	outline: none;
+}
+
+.nav-tabs {
+	&:focus {
+		border-bottom-color: @input-border-focus;
+
+//		background-color: @input-border-focus;
+		> li.active > a {
+			border-color: @input-border-focus @input-border-focus transparent @input-border-focus;
+//			.tab-focus();
+		}
+	}
+
+	> li > a {
+		outline: none;
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+.nav-tabs {
+	&.nav-stacked {
+		padding-right: 0;
+		border-bottom: none;
+		border-right: 1px solid @nav-tabs-border-color;
+
+		&:focus {
+			border-right-color: @input-border-focus;
+
+			> li.active > a {
+				border-color: @input-border-focus transparent @input-border-focus @input-border-focus;
+			}
+		}
+
+		> li {
+			margin-right: -1px;
+
+			> a {
+				margin-right: 0;
+				border-radius: @border-radius-base 0 0 @border-radius-base;
+
+				&:hover {
+					border-color: @nav-tabs-link-hover-border-color @nav-tabs-border-color @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color;
+				}
+			}
+
+			&.active > a {
+//				&,
+//				&:hover, &:focus
+//				{
+					border-color: @nav-tabs-active-link-hover-border-color transparent @nav-tabs-active-link-hover-border-color @nav-tabs-active-link-hover-border-color;
+//					border-bottom-color: @nav-tabs-active-link-hover-border-color;
+//					border-right-color: transparent;
+//				}
+			}
+		}
+	}
+}
+}

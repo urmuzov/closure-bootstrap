@@ -180,6 +180,8 @@ bootstrap3.Tabs.prototype.decorate = function(element) {
 
 	var tabBarEl = element; //goog.dom.getFirstElementChild(element);
 
+//	goog.dom.setFocusableTabIndex( tabBarEl, false );
+
 //	goog.ui.registry.setDecoratorByClassName( 'tab',
 //		function() {
 //			return new goog.ui.Tab(null, bootstrap3.Tabs.TabRenderer.getInstance());
@@ -225,8 +227,6 @@ bootstrap3.Tabs.prototype.render = function( containerElement ) {
 	}
 
 	this.createAndAddContentWrapperElement( tabBarEl, containerElement );
-
-	goog.dom.setFocusableTabIndex( tabBarEl, false );
 
 	this.decorate(tabBarEl);
 };
@@ -353,7 +353,10 @@ bootstrap3.Tabs.prototype.initialiseTabPanesFromTabs = function(tabBarEl, tabEle
 				contentWrapperEl.appendChild( contentPane );
 			}
 
-			this.showTabContentPane_( contentPane, index == selectedTabIndex, tabElement.id );
+			if( index != selectedTabIndex ) {
+				goog.dom.classes.remove( tabElement, 'in', 'active' );
+			}
+				this.showTabContentPane_( contentPane, index == selectedTabIndex, tabElement.id );
 //			if( this.fade ) {
 //				if( index == selectedTabIndex ) {
 //					goog.dom.classes.add( contentPane, 'tab-pane', 'fade', 'in', 'active' );
