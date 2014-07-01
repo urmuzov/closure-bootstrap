@@ -263,7 +263,7 @@ bootstrap3.Tabs.prototype.calculateSelectedTabIndex = function(tabBarEl) {
 	}
 
 	if( selectedTabId !== undefined ) {
-		if( selectedTabId[0] == '#' ) {
+		if( /^tab_/.test(selectedTabId) ) {
 			var selectedTab = this.tabBar_.getChild(selectedTabId);
 			if( selectedTab ) {
 				selectedTabIndex = this.tabBar_.indexOfChild(selectedTab);
@@ -292,7 +292,7 @@ bootstrap3.Tabs.prototype.storeTabIdInHistory = function( tabId ) {
 //			tabIndex = bootstrap3.utils.indexOfElementWithinParent()
 		goog.net.cookies.set( this.cookieName_, '#' + tabId ); //tabIndex );
 
-		if( historyValue[0] == '#' ) {
+		if( /^tab_/.test(historyValue) ) {
 			historyValue = historyValue.substring(1);
 		}
 		if( historyValue[0] == '{' ) {

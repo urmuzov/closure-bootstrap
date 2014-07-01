@@ -22,9 +22,10 @@ bootstrap3.utils.checkMouseOut = function( event, element ) {
  */
 bootstrap3.utils.indexOfElementWithinParent = function( element ) {
 	var index = 0;
+
 	while( element ) {
 		element = goog.dom.getPreviousElementSibling( element );
 		index++;
 	}
-	return index;
+	return index - 1;
 };

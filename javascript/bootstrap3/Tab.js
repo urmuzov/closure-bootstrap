@@ -41,7 +41,7 @@ goog.inherits(bootstrap3.Tab, goog.ui.Tab);
 bootstrap3.Tab.prototype.setHref = function( href ) {
 	if( href !== undefined ) {
 		if( href[0] == '#' ) {
-			this.setId( href );
+			this.setId( href.replace('#', 'tab_') );
 		}
 
 		this.href_ = href; // || 'javascript:;';
