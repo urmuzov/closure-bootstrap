@@ -188,25 +188,46 @@ Not supported
 
 
 ## TabBar (Tabs and Pills)
+![Rendered Tabs](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/rendered%20tabs_9.png "Rendered Tabs")
+
 ### Rendering:
 
-    var tabs = new bootstrap.Tabs(); // or new bootstrap.Pills();
-    tabs.addChild(new bootstrap.Tab('tab1'), true);
-    tabs.addChild(new bootstrap.Tab('tab2'), true);
-    tabs.addChild(new bootstrap.Tab('tab3'), true);
+    var tabs = new bootstrap3.Tabs(); // or new bootstrap3.Pills();
+    tabs.addChild('Profile', '#tabProfile', 'Profile...');
+    tabs.addChild('Messages', 'content/messages');
+    tabs.addChild('Settings', '#tabSettings', function() { return 'Settings...'; } );
     tabs.setSelectedTabIndex(0);
     tabs.render(goog.dom.getElement('tabs1'));
 
 ### Decorating:
 You need to add class `tab` to all your tabs:
 
-    <ul id="tabs2" class="tabs">
-        <li class="tab active"><a href="#">Home</a></li>
-        <li class="tab"><a href="#">Profile</a></li>
-        <li class="tab"><a href="#">Messages</a></li>
-        <li class="tab"><a href="#">Settings</a></li>
-        <li class="tab"><a href="#">Contact</a></li>
-    </ul>
+	<div class="container">
+        <ul id="tabs2" class="nav nav-tabs">
+            <li class="active"><a href="#tabHome">Home</a></li>
+            <li><a href="#tabProfile">Profile</a></li>
+            <li><a href="#tabMessages">Messages</a></li>
+            <li><a href="#tabSettings">Settings</a></li>
+            <li><a href="#tabContact">Contact</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="tabHome" class="tab-pane fade in active">
+                Home...
+            </div>
+            <div id="tabProfiles" class="tab-pane fade in active">
+                Profiles...
+            </div>
+            <div id="tabMessages" class="tab-pane fade in active">
+                Messages...
+            </div>
+            <div id="tabSettings" class="tab-pane fade in active">
+                Settings...
+            </div>
+            <div id="tabContact" class="tab-pane fade in active">
+                Contact...
+            </div>
+        </div>
+    </div>
     ...
     var tabs = goog.ui.decorate(goog.dom.getElement('tabs2'));
 
