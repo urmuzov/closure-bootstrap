@@ -172,13 +172,15 @@ bootstrap3.Tabs.prototype.createAndAddContentWrapperElement = function( tabBarEl
 
 /**
  * Decorates the given element as a TabBar and associates TabPanes with each Tab.
- * @param {Element} element Element to decorate.
+ * @param {Element} containerElement Element to decorate.
  * @override
  */
-bootstrap3.Tabs.prototype.decorate = function(element) {
+bootstrap3.Tabs.prototype.decorate = function(containerElement) {
 //	this.setElementInternal(element);
 
-	var tabBarEl = element; //goog.dom.getFirstElementChild(element);
+	var tabBarEl = goog.dom.classes.has(containerElement, 'nav') ?
+						containerElement :
+						goog.dom.getElementByClass('nav', containerElement); // goog.dom.getFirstElementChild(element);
 
 //	goog.dom.setFocusableTabIndex( tabBarEl, false );
 
@@ -193,8 +195,6 @@ bootstrap3.Tabs.prototype.decorate = function(element) {
 	this.initialiseTabPanesFromTabs( tabBarEl,
 		goog.dom.getElementsByTagNameAndClass('li', undefined, tabBarEl),
 		selectedTabIndex );
-
-	// goog.dom.classes.add(tabBarEl, 'nav', 'nav-tabs');
 
 //	this.addChild( this.tabBar_, false );
 	//this.tabBar_.setFocusable(false);
@@ -228,7 +228,7 @@ bootstrap3.Tabs.prototype.render = function( containerElement ) {
 
 	this.createAndAddContentWrapperElement( tabBarEl, containerElement );
 
-	this.decorate(tabBarEl);
+	this.decorate(containerElement);
 };
 
 /**
@@ -327,6 +327,8 @@ bootstrap3.Tabs.prototype.storeTabIdInHistory = function( tabId ) {
  * @param {number} selectedTabIndex
  */
 bootstrap3.Tabs.prototype.initialiseTabPanesFromTabs = function(tabBarEl, tabElements, selectedTabIndex) {
+	var contentWrapperEl;
+
 	// add the class names to each of the tab panes.
 	// Function passed to forEach: (element, index, array)
 	goog.array.forEach( tabElements, function(tabElement, index) {
@@ -343,9 +345,9 @@ bootstrap3.Tabs.prototype.initialiseTabPanesFromTabs = function(tabBarEl, tabEle
 			var contentPaneId = href.getFragment(),
 				contentPane = /** @type {HTMLElement} */(goog.dom.getElement( contentPaneId ));
 			if( !contentPane ) {
-				var contentWrapperEl = goog.dom.getElementByClass( 'tab-content', tabBarEl.parentNode );
 				if( !contentWrapperEl ) {
-					contentWrapperEl = this.createAndAddContentWrapperElement( tabBarEl, tabBarEl.parentNode );
+					contentWrapperEl = goog.dom.getElementByClass( 'tab-content', tabBarEl.parentNode ) ||
+						this.createAndAddContentWrapperElement( tabBarEl, tabBarEl.parentNode );
 				}
 
 				contentPane = goog.dom.createDom('div', {'id': contentPaneId});

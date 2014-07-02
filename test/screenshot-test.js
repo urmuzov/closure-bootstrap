@@ -136,6 +136,14 @@ casper.then(function(){
 	casper.waitForSelector('#tab_rPane1', function() {
 		casper.click('#tab_rPane1 a');
 		phantomcss.screenshot('#r-tabs', 'rendered tabs');
+
+		casper.click('#tab_rJustifiedPillPane3 a');
+		phantomcss.screenshot('#r-pills', 'pills');
+
+		this.viewport(775,370);
+		casper.click('#tab_rStackedPane3 a');
+		phantomcss.screenshot('#r-tabsStacked', 'stacked tabs');
+
 	}, function() {
 		casper.warn('timeout waiting for rendered tabs');
 		phantomcss.screenshot('#r-tabs', 'rendered tabs');

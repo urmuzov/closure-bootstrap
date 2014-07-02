@@ -188,6 +188,11 @@ Not supported
 
 
 ## TabBar (Tabs and Pills)
+Tabs and Pills with static and AJAX content panes.  Active tab/pill can be defined by:
+ - "active" class attribute
+ - # component of URL
+ - cookies
+
 ![Rendered Tabs](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/rendered%20tabs_9.png "Rendered Tabs")
 
 ### Rendering:
@@ -202,8 +207,8 @@ Not supported
 ### Decorating:
 You need to add class `tab` to all your tabs:
 
-	<div class="container">
-        <ul id="tabs2" class="nav nav-tabs">
+	<div id="tabs2" class="container">
+        <ul class="nav nav-tabs">
             <li class="active"><a href="#tabHome">Home</a></li>
             <li><a href="#tabProfile">Profile</a></li>
             <li><a href="#tabMessages">Messages</a></li>
@@ -214,23 +219,23 @@ You need to add class `tab` to all your tabs:
             <div id="tabHome" class="tab-pane fade in active">
                 Home...
             </div>
-            <div id="tabProfiles" class="tab-pane fade in active">
+            <div id="tabProfiles" class="tab-pane fade">
                 Profiles...
             </div>
-            <div id="tabMessages" class="tab-pane fade in active">
+            <div id="tabMessages" class="tab-pane fade">
                 Messages...
             </div>
-            <div id="tabSettings" class="tab-pane fade in active">
+            <div id="tabSettings" class="tab-pane fade">
                 Settings...
             </div>
-            <div id="tabContact" class="tab-pane fade in active">
+            <div id="tabContact" class="tab-pane fade">
                 Contact...
             </div>
         </div>
     </div>
     ...
-    var tabs = goog.ui.decorate(goog.dom.getElement('tabs2'));
-
+    var tabs = new bootstrap3.Tabs();
+    tabs.decorate(goog.dom.getElement('tabs2'));
 
 
 # Tests

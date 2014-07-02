@@ -2,6 +2,7 @@ goog.provide('bootstrap3.TabBarRenderer');
 
 goog.require('goog.ui.TabBarRenderer');
 goog.require('bootstrap3.TabRenderer');
+goog.require('bootstrap3.Tab');
 
 /**
  * Renderer for {@link goog.ui.TabBar}s, based on the {@code goog.ui.TabBarRenderer} code.
@@ -93,7 +94,7 @@ bootstrap3.TabBarRenderer.prototype.canDecorate = function(element) {
 
 bootstrap3.TabBarRenderer.prototype.getDecoratorForChild = function(element) {
 	if( element.tagName == 'LI' ) {
-		return new bootstrap3.Tab(element.innerHTML, bootstrap3.TabRenderer.getInstance());
+		return new bootstrap3.Tab(element.innerText, bootstrap3.TabRenderer.getInstance());
 	} else {
 		goog.ui.registry.getDecorator(element);
 	}
