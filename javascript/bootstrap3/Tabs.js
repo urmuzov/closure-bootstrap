@@ -192,10 +192,6 @@ bootstrap3.Tabs.prototype.decorate = function(containerElement) {
 
 	var selectedTabIndex = this.calculateSelectedTabIndex(tabBarEl);
 
-	this.initialiseTabPanesFromTabs( tabBarEl,
-		goog.dom.getElementsByTagNameAndClass('li', undefined, tabBarEl),
-		selectedTabIndex );
-
 //	this.addChild( this.tabBar_, false );
 	//this.tabBar_.setFocusable(false);
 	//this.tabBar_.setParent( this );
@@ -206,6 +202,10 @@ bootstrap3.Tabs.prototype.decorate = function(containerElement) {
 			console.error(e);
 		}
 	}
+
+	this.initialiseTabPanesFromTabs( tabBarEl,
+		goog.dom.getElementsByTagNameAndClass('li', undefined, tabBarEl),
+		selectedTabIndex );
 
 	// addChild(child, opt_render)
 	// addChildAt(child, insertionIndex, opt_render)

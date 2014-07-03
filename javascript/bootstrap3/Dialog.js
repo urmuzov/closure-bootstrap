@@ -128,7 +128,7 @@ bootstrap3.Dialog.prototype.createDom = function() {
 				'type': 'button',
 //				'data-dismiss': 'modal',
 				'aria-hidden': 'true'},
-			'×' ),
+			'Ã—' ),
 		this.titleTextEl_ = dom.createDom(
 			'h4',
 			{'className': 'modal-title',
