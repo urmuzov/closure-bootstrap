@@ -66,7 +66,7 @@ bootstrap3.Dialog = function( opt_class, opt_useIframeMask, opt_domHelper) {
 	if( opt_class ) {
 		this.dlg_class_ += ' ' + opt_class;
 	}
-	this.class_ = '';
+	this.class_ = 'modal';
 
 	this.buttons_ = goog.ui.Dialog.ButtonSet.createOkCancel();
 };
