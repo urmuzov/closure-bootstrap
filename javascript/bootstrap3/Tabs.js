@@ -536,17 +536,16 @@ bootstrap3.Tabs.prototype.getTabBar = function() {
 	return this.tabBar_;
 };
 
-/** Make this work with Component/Container.addChild( this, boolean ) */
-bootstrap3.Tabs.prototype.getParent = function() {
-	return this.parent_; //tabBar_.getParent();
-};
-bootstrap3.Tabs.prototype.setParent = function(parent) {
-	this.parent_ = parent; //tabBar_.setParent(parent);
-};
-bootstrap3.Tabs.prototype.getId = function() {
-	return this.tabBar_.getId();
-};
-
+///** Make this work with Component/Container.addChild( this, boolean ) */
+//bootstrap3.Tabs.prototype.getParent = function() {
+//	return this.parent_; //tabBar_.getParent();
+//};
+//bootstrap3.Tabs.prototype.setParent = function(parent) {
+//	this.parent_ = parent; //tabBar_.setParent(parent);
+//};
+//bootstrap3.Tabs.prototype.getId = function() {
+//	return this.tabBar_.getId();
+//};
 
 /**
  * @param {number} selectedTabIndex
