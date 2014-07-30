@@ -187,6 +187,34 @@ Not supported
     </script>
 
 
+## Slider
+Bootstrap-themed implementation of `goog.ui.SliderBase`.
+![Slider](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/slider_9.png "Slider")
+![Vertical Slider](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/vert-slider_10.png "Vertical Slider")
+
+### Rendering:
+Not supported
+
+### Decorating
+    <td id="slider">
+        <div>50</div>
+  	    <input type="hidden" value="50" name="my_slider" id="my_slider">
+  	    <p class="hint">Good</p>
+    </td>
+
+or
+
+	<label class="control-label col-sm-2" for="my_slider">Rating</label>
+	<div class="col-sm-10" id="slider">
+		<input type="range" class="form-control" value="50" name="my_slider" id="my_slider">
+		<p class="hint">Good</p>
+	</div>
+
+	var slider = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"} );
+	// optionally: slider.setOrientation(goog.ui.SliderBase.Orientation.VERTICAL);
+	slider.decorate(goog.dom.getElement('slider'));
+
+
 ## TabBar (Tabs and Pills)
 Tabs and Pills with static and AJAX content panes.  Active tab/pill can be defined by:
  - "active" class attribute

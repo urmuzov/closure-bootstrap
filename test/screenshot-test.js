@@ -129,6 +129,17 @@ casper.then(function(){
 	}, 5005);
 });
 
+// ========== Slider ==========
+casper.thenOpen( './test/Slider_test.html' );
+casper.then(function(){
+	this.viewport(800,370);
+	casper.waitForSelector('#slider5 .slider', function() {
+		casper.click('#slider3');
+		phantomcss.screenshot('#slider3', 'slider');
+		phantomcss.screenshot('#slider5', 'vert-slider');
+	});
+});
+
 // ========== Tabs and Pills ==========
 casper.thenOpen( './test/Tabs_test.html' );
 casper.then(function(){
