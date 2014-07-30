@@ -6,6 +6,7 @@
     "Nicholas Albion"
   ],
   "description": "Google Closure Library UI styled with Twitter Bootstrap",
+  "keywords": ["closure", "bootstrap", "combo", "dialog", "tabs", "slider", "time picker", "date picker"],
   "license": "MIT",
   "ignore": [
     "bower_components"

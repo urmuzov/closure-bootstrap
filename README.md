@@ -188,7 +188,7 @@ Not supported
 
 
 ## Slider
-Bootstrap-themed implementation of `goog.ui.SliderBase`.
+Bootstrap-themed implementation of `goog.ui.SliderBase`.  Supports optional "hint"
 
 ![Slider](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/slider_9.png "Slider")
 ![Vertical Slider](https://raw.githubusercontent.com/nalbion/closure-bootstrap/master/screenshots/vert-slider_10.png "Vertical Slider")
