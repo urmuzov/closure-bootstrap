@@ -91,7 +91,7 @@ bootstrap3.TimePicker.prototype.onMenuSelected_ = function(e) {
 // if( this.visibleCount_ == 0 ) { this.labelInput_.setValue( this.lastToken_ ); }
 
 /**
- * @inherit
+ * @inheritDoc
  */
 bootstrap3.TimePicker.prototype.onInputEvent_ = function(e) {
 //bootstrap3.TimePicker.prototype.handleInputChange_ = function() {

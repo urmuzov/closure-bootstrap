@@ -35,7 +35,7 @@ goog.inherits(bootstrap3.TextAreaForm, goog.ui.Component);
  * @type {string}
  * @private
  */
-this.previousValue;
+bootstrap3.TextAreaForm.prototype.previousValue;
 
 
 bootstrap3.TextAreaForm.prototype.enterDocument = function() {

@@ -522,7 +522,7 @@ bootstrap3.Tabs.prototype.setStacked = function(stacked) {
 bootstrap3.Tabs.prototype.setOrientation = function(orientation) {
 	var element = this.tabBar_.getElement();
 	if( element ) {
-		goog.dom.styles.enable( element, 'nav-stacked',
+		goog.dom.classes.enable( element, 'nav-stacked',
 								goog.ui.Container.Orientation.VERTICAL == orientation );
 	}
 	this.tabBar_.orientation_ = orientation;
