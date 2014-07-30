@@ -61,14 +61,14 @@ module.exports = function(grunt) {
 			},
 			javascript: {
 				files: ['javascript/**/*.js'],
-				tasks: ['closure'],
+				tasks: ['closure', 'copy:test_raw'],
+				options: { livereload: true }
+			},
+			test_html: {
+				files: ['test/**/*.html'],
+				tasks: ['copy:test_html'],
 				options: { livereload: true }
 			}
-//			test_html: {
-//				files: ['test/**/*.html'],
-//				tasks: ['copy:test_html'],
-//				options: { livereload: true }
-//			},
 //			test: {
 //				options: {
 //					livereload: true
@@ -199,7 +199,7 @@ module.exports = function(grunt) {
 			test: {
 				options: {
 					root_with_prefix: [
-						'"test ../test"',
+//						'"test ../test"',
 						'"<%= closureConfig.jsSrcPath %> ../../../../javascript"'
 //						'"<%= closureConfig.componentPath %> ../bower_components"'
 					]
@@ -219,14 +219,18 @@ module.exports = function(grunt) {
 		closureBuilder: {
 			options: {
 				closureLibraryPath: '<%= closureConfig.closureLibrary %>',
-				inputs: ['<%= closureConfig.jsSrcPath %>\bootstrap3'],
+				namespaces: ['bootstrap3.Button', 'bootstrap3.ComboBox', 'bootstrap3.ComboDatePicker',
+							'bootstrap3.Dialog', 'bootstrap3.NavBar', 'bootstrap3.NavBarToggle',
+							'bootstrap3.Pills', 'bootstrap3.Slider', 'bootstrap3.Tab', 'bootstrap3.Tabs',
+							'bootstrap3.TextAreaForm', 'bootstrap3.TimePicker'],
+//				inputs: ['<%= closureConfig.jsSrcPath %>/bootstrap3/*.js'],
 //				paths: '<%= closureConfig.closureLibrary %>',
 				compile: true,
 				compilerFile: compiler.getPath(),
 				compilerOpts: {
 //					debug: true,
 					js: [
-//						'<%= closureConfig.closureLibrary %>/closure/goog/deps.js',
+						'<%= closureConfig.closureLibrary %>/closure/goog/deps.js'
 //						'<%= closureConfig.jsSrcPath %>/deps.js'
 					],
 					compilation_level: 'ADVANCED_OPTIMIZATIONS',
@@ -246,8 +250,8 @@ module.exports = function(grunt) {
 			},
 			test: {
 				options: {
-					inputs: ['<%= closureConfig.jsSrcPath %>\bootstrap',
-						'<%= closureConfig.jsSrcPath %>\bootstrap3'],
+//					inputs: ['<%= closureConfig.jsSrcPath %>\bootstrap',
+//						'<%= closureConfig.jsSrcPath %>\bootstrap3'],
 					compile: false,
 					compilerOpts: {
 						compilation_level: 'WHITESPACE_ONLY'
@@ -256,15 +260,16 @@ module.exports = function(grunt) {
 					}
 				},
 				src: [
-					'<%= closureConfig.closureLibrary %>',
-					'<%= closureConfig.jsSrcPath %>'
+					'<%= closureConfig.jsSrcPath %>/bootstrap3',
+					'<%= closureConfig.closureLibrary %>/closure',
+					'<%= closureConfig.closureLibrary %>/third_party'
 				],
 				dest: 'test/js/<%= package.name %>.js'
 			},
 			dist: {
 				src: [
 //					'<%= closureConfig.jsSrcPath %>/bootstrap',
-					'<%= closureConfig.jsSrcPath %>\bootstrap3',
+					'<%= closureConfig.jsSrcPath %>/bootstrap3',
 					'<%= closureConfig.closureLibrary %>/closure',
 					'<%= closureConfig.closureLibrary %>/third_party'
 //					'<%= closureConfig.componentPath %>'
@@ -305,6 +310,11 @@ module.exports = function(grunt) {
 		}
 	}); // end grunt.initConfig();
 
+	grunt.registerTask('closure', [
+		'closureDepsWriter:test',
+		'closureBuilder:test'
+	]);
+
 	grunt.registerTask('test-raw', [
 		'clean:server',
 //		'bower',
@@ -323,10 +333,10 @@ module.exports = function(grunt) {
 		'clean:server',
 //		'bower',
 		'less:test',
-		'closureDepsWriter:test',
-		'closureBuilder:test',
+		'closure',
 //		'configureRewriteRules',
 		'copy:test_html',
+		'copy:test_raw',		// for source map
 		'connect:test',
 //		'open:test',
 		'watch'
