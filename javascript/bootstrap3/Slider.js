@@ -116,17 +116,17 @@ bootstrap3.Slider.prototype.decorateInternal = function(element) {
 
 	//(may need to restore this if we use the component registry) this.legend_ = this.legendSet_[d.id].legend;
 
-	if( this.inputElement.type != 'range' ) {
-		// If the HTML tries to create a range input in an old browser, it will end up as a text input control.
-		this.inputElement.type = 'hidden';	// this doesn't work on Firefox: goog.style.showElement( this.inputElement, false );
-		goog.dom.classes.set( valueDiv, bootstrap3.Slider.CSS_CLASS_PREFIX );
-		bootstrap3.Slider.superClass_.decorateInternal.call(this, valueDiv);
-	} else {
+	if( this.inputElement.type == 'range' ) {
 		if( valueDiv ) {
 			goog.style.showElement( valueDiv, false );
 		}
 		goog.dom.classes.set( this.inputElement, 'form-control ' + bootstrap3.Slider.CSS_CLASS_PREFIX );
 		goog.ui.Component.prototype.decorateInternal.call(this, valueDiv || element);
+	} else {
+		// If the HTML tries to create a range input in an old browser, it will end up as a text input control.
+		this.inputElement.type = 'hidden';	// this doesn't work on Firefox: goog.style.showElement( this.inputElement, false );
+		goog.dom.classes.set( valueDiv, bootstrap3.Slider.CSS_CLASS_PREFIX );
+		bootstrap3.Slider.superClass_.decorateInternal.call(this, valueDiv);
 	}
 
 	var max = this.inputElement.getAttribute('max');
