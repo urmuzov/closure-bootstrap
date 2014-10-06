@@ -180,8 +180,8 @@ bootstrap3.Slider.THUMB_CSS_CLASS = goog.getCssName(bootstrap3.Slider.CSS_CLASS_
 bootstrap3.Slider.prototype.getCssClass = function(orient) {
 //	return bootstrap3.Slider.CSS_CLASS_PREFIX;
 	return orient == goog.ui.SliderBase.Orientation.VERTICAL ?
-		goog.getCssName(bootstrap3.Slider.CSS_CLASS_PREFIX, goog.ui.SliderBase.Orientation.VERTICAL) :
-		goog.getCssName(bootstrap3.Slider.CSS_CLASS_PREFIX, goog.ui.SliderBase.Orientation.HORIZONTAL);
+		goog.getCssName(bootstrap3.Slider.CSS_CLASS_PREFIX, 'vertical') :
+		goog.getCssName(bootstrap3.Slider.CSS_CLASS_PREFIX, 'horizontal');
 };
 
 /** @inheritDoc */
