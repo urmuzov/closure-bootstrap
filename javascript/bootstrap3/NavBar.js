@@ -5,8 +5,8 @@ goog.require('goog.dom.DomHelper');
 
 /**
  * NavBar UI component styled with Twitter Bootstrap
- * @param {string} opt_title
- * @param {string} opt_home_url
+ * @param {string=} opt_title
+ * @param {string=} opt_home_url
  * @param {boolean=} opt_collapsible
  * @param {bootstrap3.NavBar.Location=} opt_location
  * @param {bootstrap3.NavBarRenderer=} opt_renderer Renderer used to render or decorate the container; defaults to {@link bootstrap3.PillsRenderer}.
