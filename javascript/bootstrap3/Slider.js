@@ -116,6 +116,7 @@ bootstrap3.Slider.prototype.decorateInternal = function(element) {
 		}
 	}
 
+	this.wrapperEl = wrapperEl;
 	value = parseInt( value, 10 );
 
 	//(may need to restore this if we use the component registry) this.legend_ = this.legendSet_[d.id].legend;
@@ -245,22 +246,22 @@ bootstrap3.Slider.prototype.getThumbCoordinateForValue = function(val) {
 	var coord = new goog.math.Coordinate;
 
 	//if (this.valueThumb) {
-		var min = this.getMinimum();
-		var max = this.getMaximum();
-		// This check ensures the ratio never take NaN value, which is possible when
-		// the slider min & max are same numbers (i.e. 1).
-		var ratio = (val == min && min == max) ? 0 : (val - min) / (max - min),
-			thumbSize = this.valueThumb ? this.valueThumb.offsetHeight : 28;
+	var min = this.getMinimum();
+	var max = this.getMaximum();
+	// This check ensures the ratio never take NaN value, which is possible when
+	// the slider min & max are same numbers (i.e. 1).
+	var ratio = (val == min && min == max) ? 0 : (val - min) / (max - min),
+		thumbSize = this.valueThumb ? this.valueThumb.offsetHeight : 28;
 
-		if (this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL) {
-			var h = this.getElement().clientHeight - thumbSize;
-			var bottom = Math.round(ratio * h);
-			coord.y = h - bottom;
-		} else {
-			var w = this.getElement().clientWidth - thumbSize;
-			var left = Math.round(ratio * w);
-			coord.x = left;
-		}
+	if (this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL) {
+		var h = this.getElement().clientHeight - thumbSize;
+		var bottom = Math.round(ratio * h);
+		coord.y = h - bottom;
+	} else {
+		var w = this.getElement().clientWidth - thumbSize;
+		var left = Math.round(ratio * w);
+		coord.x = left;
+	}
 //	}
 	return coord;
 };
@@ -279,32 +280,23 @@ bootstrap3.Slider.prototype.setValue = function( value ) {
  * @param {number} value - the integer value for the slider and hidden <input>
  */
 bootstrap3.Slider.prototype.setRatingValue = function( value ) {
-	var parentEl = this.getElement().parentElement;	// The row containing <p class="hint">,	<input type="text"> and <input type="hidden">
-
 	goog.a11y.aria.setState(this.getElement(), 'valuenow', value);
 
-	if (parentEl.className == 'slider') { // .tagName.toUpperCase() == 'TD' ) {
-		parentEl = parentEl.parentElement;
-	}
-
-	var hintP = goog.dom.getElementByClass('hint', parentEl),
-		hint = this.getLabel(value);
+	var hint = this.getLabel(value);
 
 	if (hint) {
-		var text = bootstrap3.utils.getElementsByTagNameAndAttribute('input', 'type', 'text', parentEl)[0];
+		var text = bootstrap3.utils.getElementsByTagNameAndAttribute('input', 'type', 'text', this.wrapperEl.parentElement)[0];
 		if( goog.isDef(text) ) {
 			text.setAttribute('placeholder', hint);
 		} // else
 	}
 
-	if (hintP) {
-		//value += '';	// by far, the most efficient way to cast number to string. @see http://jsperf.com/number-to-string3
-		goog.dom.setTextContent( hintP,
-								hint == null ? value :
-									this.tooltip === null ?
-										value + ': ' + hint : hint);
-	} else if(hint) {
-		value += ': ' + hint;
+	if (hint) {
+		var hintP = goog.dom.getElementByClass('hint', this.wrapperEl);
+		if (hintP) {
+			goog.dom.setTextContent(hintP, //hint || value);
+				this.tooltip ? value + ': ' + hint : hint);
+		}
 	}
 
 	if (this.tooltip) {
