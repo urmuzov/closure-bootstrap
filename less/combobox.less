@@ -1,0 +1,36 @@
+//.goog-combobox input.label-input-label {
+//	background-color: #fff;
+//	color: #aaa;
+//}
+
+.combobox {
+	.btn {
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+
+	.dropdown-menu {
+		margin-top: -1px;
+		max-height: 200px;
+		overflow: auto;
+//		z-index: 1000;
+	}
+
+	&.has-error {
+		.btn {
+			border-color: @state-danger-text;
+		}
+		.caret {
+			border-top-color: @state-danger-text;
+		}
+	}
+}
+
+.combobox:after {
+	content: " ";
+}
+
+/* IE6 only hack */
+* html .combobox btn {
+	padding: 0 3px;
+}

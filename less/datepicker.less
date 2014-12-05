@@ -1,0 +1,80 @@
+@calender-today-bg: #9ab;
+@calendar-wkend-bg: #eee;
+@calendar-dropdown-width: 10em;
+
+//.dropdown.date {
+//	width: @calendar-dropdown-width;
+//	display: inline-table;
+//}
+
+.date .dropdown {
+	position: initial;
+}
+.date .input-group .form-control {
+	width: 140px;
+}
+
+.goog-date-picker {
+	&:focus, tbody:focus {
+		outline: none;
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+
+	th {
+		text-align: center;
+	}
+
+	td {
+		text-align: center;
+		vertical-align: middle;
+		padding: 1px 3px;
+	}
+
+//	input[type="date"]::-webkit-calendar-picker-indicator {}
+}
+
+.goog-date-picker-today {
+	background: @calender-today-bg;
+	font-weight: bold !important;
+	border-color: #246 #9bd #9bd #246;
+	color: #fff;
+}
+
+td.goog-date-picker-selected {
+	//background: #c3d9ff;
+	color: @component-active-color;
+	background-color: @component-active-bg;
+}
+
+.goog-date-picker-wday {
+	border-bottom-width: 1px;
+}
+
+.goog-date-picker-wday {
+	padding: 1px 3px;
+	border: 0;
+//	border-color: #a2bbdd;
+	border-style: solid;
+}
+
+.goog-date-picker-other-month {
+	color: #888;
+}
+
+.goog-date-picker-wkend-start, .goog-date-picker-wkend-end {
+	background-color: @calendar-wkend-bg;
+
+	&.goog-date-picker-today {
+		background-color: darken(@calendar-wkend-bg, 30%);
+
+		&.goog-date-picker-selected {
+			background-color: darken(@component-active-bg, 30%);
+		}
+	}
+}
+
+//.goog-date-picker-head td { padding-bottom: 3px; }
+.goog-date-picker-foot td { padding-top: 5px; }

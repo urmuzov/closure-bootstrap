@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Dialog Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.Dialog');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+		.container {
+			width:  350px;
+			height:  370px;
+			padding: 25px;
+			text-align: center;
+		}
+		div.form-group:last-child {
+			margin-bottom: 0;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<a href="#" class="btn btn-success"
+	   id="dlgButton"
+	   data-toggle="modal"
+	   data-target="#basicModal">Click to open the Dialog</a>
+</div>
+
+<script>
+	var dialog, events = [], CANCEL = 'c', APPLY = 'a', OK = 'o';
+
+	function logEvent(event) {
+		console.info( event );
+		events.push( event );
+		if( APPLY == event.key ) {
+			event.preventDefault();
+		}
+	}
+
+	function setUp() {
+		dialog = new bootstrap3.Dialog('modal-sm');
+		dialog.setTitle('Bootstrap-Style Dialog');
+		dialog.setContent('<form>' +
+				'<div class="form-group">' +
+					'<label for="email">Email address</label>' +
+					'<input type="email" class="form-control" id="email" placeholder="Enter email">' +
+				'</div>' +
+				'<div class="form-group">' +
+					'<label for="password">Password</label>' +
+					'<input type="password" class="form-control" id="password" placeholder="Password">' +
+				'</div>' +
+//				'<div class="checkbox">' +
+//					'<label><input type="checkbox">Weekly emails</input></label>' +
+//				'</div>' +
+				'</form>');
+		dialog.setEscapeToCancel(true);
+
+		var buttons = new goog.ui.Dialog.ButtonSet();
+		buttons.addButton( {caption: 'Cancel', key: 'c'}, false, true );
+		buttons.addButton( {caption: 'Apply', key: 'a'} );
+		buttons.addButton( {caption: 'OK', key: 'o'}, true );
+		dialog.setButtonSet( buttons );
+
+		goog.events.listen( goog.dom.getElement('dlgButton'), goog.events.EventType.CLICK, function() {
+			dialog.setVisible(true);
+		});
+		dialog.addEventListener( goog.ui.PopupBase.EventType.HIDE, logEvent );
+		goog.events.listen( dialog, goog.ui.Dialog.EventType.SELECT, logEvent );
+//		function(e) {
+//			this.logger_.fine('clicked button ' + e.key);
+//			dialog.setVisible( false );
+//		});
+	}
+
+	function tearDown() {
+	}
+
+	function testRenderDialog() {
+		var dlgElement = dialog.getDialogElement(),
+			bgElement = dialog.getBackgroundElement(),
+			element = dialog.getElement();
+
+		assertEquals( 'modal-dialog modal-sm', dlgElement.className );
+		assertEquals( 'modal-backdrop fade', bgElement.className );
+		assertEquals( 'modal fade', element.className );
+
+		dialog.setVisible( true );
+		assertEquals( 'modal-backdrop fade in', bgElement.className );
+		assertEquals( 'modal fade in', element.className );
+
+//		dialog.setVisible( false );
+//		assertEquals( 'modal fade', bgElement.className );
+	}
+</script>
+</body>
+</html>

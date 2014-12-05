@@ -1,0 +1,36 @@
+@import "combobox.less";
+
+// http://stackoverflow.com/questions/15070600/why-has-the-behavior-of-input-type-date-changed
+input[type="date"]::-webkit-calendar-picker-indicator {
+//	display: inline-block;
+//	margin-top: 2%;
+//	float: right;
+}
+input[type="date"]::-webkit-inner-spin-button
+//, input[type="time"]::-webkit-inner-spin-button
+{
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="date"].form-control
+//, input[type="time"].form-control
+{
+	padding-right: 4px;
+	width: 10em;
+}
+
+
+@time-input-width: 80px;
+@time-control-width: @padding-base-horizontal * 2 + @time-input-width;		// 12px +
+
+.time.combobox.input-group {
+	width: @time-control-width;
+
+	.dropdown-menu {
+		min-width: @time-control-width;
+	}
+	.form-control {
+//		width: 5em;
+	}
+}

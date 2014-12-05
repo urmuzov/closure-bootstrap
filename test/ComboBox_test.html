@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Closure Unit Tests - bootstrap3.ComboBox</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.dom');
+		goog.require('goog.dom.TagName');
+		goog.require('goog.dom.classes');
+		goog.require('goog.events');
+		goog.require('goog.ui.ControlRenderer');
+//		goog.require('goog.ui.Component');
+//		goog.require('goog.ui.ComboBox');
+		goog.require('bootstrap3.ComboBox');
+	</script>
+
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style>
+		.comboContainer { margin: auto; padding: 20px 50px 80px; width: 260px; }
+	</style>
+</head>
+<body>
+	<div id="comboContainer1" class="comboContainer"></div>
+	<div id="comboContainer2" class="comboContainer"></div>
+	<script>
+	var testComboBox = function() {
+		var container1 = goog.dom.getElement('comboContainer1');
+		var comboBox1 = new bootstrap3.ComboBox('primary');
+		comboBox1.setUseDropdownArrow(true);
+		comboBox1.addItem( 'Value 1', 'val-1' );
+		comboBox1.addItem( 'Value 2', 'val-2' );
+		comboBox1.setFieldName('combo-1');
+
+		comboBox1.render(container1);
+		goog.global['comboBox1'] = comboBox1;
+
+		var container2 = goog.dom.getElement('comboContainer2');
+		var comboBox2 = new bootstrap3.ComboBox('warning');
+		comboBox2.setUseDropdownArrow(false);
+		comboBox2.addItem( 'Value 1', 'val-1' );
+		comboBox2.addItem( 'Value 2', 'val-2' );
+		comboBox2.setFieldName('combo-2');
+
+		comboBox2.render(container2);
+		comboBox2.setValue('Disabled');
+		comboBox2.setEnabled(false);
+		goog.global['comboBox2'] = comboBox2;
+	};
+	</script>
+</body>
+</html>

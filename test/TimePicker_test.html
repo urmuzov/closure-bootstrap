@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Text Time Picker Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.TimePicker');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+#container {
+	width: 320px;
+	height: 280px;
+	margin: 25px auto;
+}
+#container .to {
+	float: left;
+	padding: .5em;
+}
+#startTime, #endTime {
+	float: left;
+	height: 100%;
+}
+#startTime {
+	/*margin-right: 20px;*/
+}
+#endTime {
+	width: 145px;
+}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="startTime">
+		</div>
+		<span class="to">to</span>
+		<div id="endTime">
+		</div>
+	</div>
+
+<script>
+var timePicker1, timePicker2;
+
+function setUp() {
+	timePicker1 = new bootstrap3.TimePicker('09:00', '17:00', '12:15');
+	timePicker2 = new bootstrap3.TimePicker('09:00', '17:00', '13:00', timePicker1);
+}
+
+function tearDown() {
+}
+
+function testDecorateTextAreaForm() {
+	timePicker1.render(goog.dom.getElement('startTime'));
+	timePicker1.setFieldName('start');
+	timePicker2.render(goog.dom.getElement('endTime'));
+	timePicker2.setFieldName('end');
+}
+</script>
+</body>
+</html>

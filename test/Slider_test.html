@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Slider Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.Slider');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<style type="text/css">
+.container td {
+	padding-top: 5px;
+}
+	</style>
+</head>
+<body>
+	<h2>Simple Slider</h2>
+	<div class="container">
+		<table>
+			<tr>
+				<td>
+					<label class="control-label col-sm-2" for="my_slider1">Rating</label>
+				<td>
+				<td id="slider1">
+					<div>50</div>
+					<input type="hidden" value="50" name="my_slider1" id="my_slider1">
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<h2>Simple Range Slider</h2>
+	<div class="container">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="slider2">Rating</label>
+			<input type="range" class="form-control" value="50" name="my_slider2" id="slider2">
+		</div>
+	</div>
+
+	<h2>Slider with Hint</h2>
+	<div class="container">
+		<table>
+			<tr>
+				<td>
+					<label class="control-label col-sm-2" for="my_slider3">Rating</label>
+				<td>
+				<td id="slider3">
+					<div>50</div>
+					<input type="hidden" value="50" name="my_slider3" id="my_slider3">
+					<p class="hint">Good</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<h2>Range Slider with Hint</h2>
+	<div class="container">
+		<div>
+			<label class="control-label col-sm-2" for="my_slider4">Rating</label>
+			<div class="col-sm-10" id="slider4">
+				<input type="range" class="form-control" value="50" name="my_slider4" id="my_slider4">
+				<p class="hint">Good</p>
+		 	</div>
+		</div>
+	</div>
+
+	<h2>Vertical Slider</h2>
+	<div class="container">
+		<div class="form-group slider-group-vertical">
+			<label class="control-label" for="my_slider5">Rating</label>
+			<!-- <input type="range" class="form-control" value="50" name="my_slider3" id="my_slider3"> -->
+			<div id="slider5">
+				<div>50</div>
+				<input type="hidden" value="50" name="my_slider5" id="my_slider5">
+				<p class="hint">Good</p>
+			</div>
+		</div>
+	</div>
+
+<script>
+var slider1, slider2, slider3, slider4, slider5;
+
+function setUp() {
+	slider1 = new bootstrap3.Slider();
+	slider2 = new bootstrap3.Slider();
+	slider3 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"}, true );
+	slider4 = new bootstrap3.Slider( {0:"Bad for slider 4", 50:"Good for slider 4", 100:"Great for slider 4"}, true );
+	slider5 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"} );
+}
+
+function tearDown() {
+}
+
+function testDecorateSimpleSlider() {
+	slider1.decorate(goog.dom.getElement('slider1'));
+	assertEquals(null, slider1.getTextValue());
+}
+function testDecorateSimpleRangeSlider() {
+	slider2.decorate(goog.dom.getElement('slider2'));
+	assertEquals(null, slider2.getTextValue());
+}
+function testDecorateSliderWithHint() {
+	slider3.decorate(goog.dom.getElement('slider3'));
+	slider3.getElement().focus();
+	assertEquals('Good', slider3.getTextValue());
+}
+function testDecorateRangeSliderWithHint() {
+	slider4.decorate(goog.dom.getElement('slider4'));
+	assertEquals('Good for slider 4', slider4.getTextValue());
+}
+function testDecorateVerticalSlider() {
+	slider5.setOrientation(goog.ui.SliderBase.Orientation.VERTICAL);
+	slider5.decorate(goog.dom.getElement('slider5'));
+}
+</script>
+</body>
+</html>

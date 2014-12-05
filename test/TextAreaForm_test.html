@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 Text Area Form Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.TextAreaForm');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+.container {
+	width:  400px;
+	padding: 25px;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form id="form1" class="textarea-form focus">
+			<textarea class="form-control" rows="1" placeholder="Add a note...">The "focus" class forces the form into edit mode</textarea>
+			<div class="form-group">
+				<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
+				<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
+			</div>
+		</form>
+	</div>
+
+	<div class="container">
+		<form id="form2" class="textarea-form">
+			<textarea class="form-control" rows="1" placeholder="Add a note..."></textarea>
+			<div class="form-group">
+				<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
+				<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
+			</div>
+		</form>
+	</div>
+
+	<div class="container">
+		<form id="form3" class="textarea-form">
+			<textarea class="form-control" rows="1" placeholder="Add a note..."></textarea>
+			<div class="form-group">
+				<a class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancel</a>&nbsp;
+				<a class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</a>
+			</div>
+		</form>
+	</div>
+
+<script>
+var form1, form2, form3;
+
+function setUp() {
+	form1 = new bootstrap3.TextAreaForm();
+	form2 = new bootstrap3.TextAreaForm();
+	form3 = new bootstrap3.TextAreaForm('Value can be set at run-time');
+}
+
+function tearDown() {
+}
+
+function testDecorateTextAreaForm() {
+	form1.decorate( goog.dom.getElement('form1') );
+	form2.decorate( goog.dom.getElement('form2') );
+	form3.decorate( goog.dom.getElement('form3') );
+}
+</script>
+</body>
+</html>

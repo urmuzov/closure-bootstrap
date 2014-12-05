@@ -1,0 +1,11 @@
+{
+	"jsSrcPath": "javascript",
+	"bootstrapFile": "bootstrap.js",
+	"destCompiled": "dist/js/bootstrap.js",
+	"externsPath": "javascript/externs/",
+	"entryPoint": "bootstrap.init",
+	"closureLibrary": "bower_components/closure-library",
+	"componentPath": "bower_components",
+	"sourceMap": "dist/js/bootstrap.js.map",
+	"outputWrapper": "(function(){%output%}).call(this); //# sourceMappingURL=/js/bootstrap.js.map"
+}

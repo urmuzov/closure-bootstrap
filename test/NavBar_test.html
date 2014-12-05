@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Bootstrap 3 NavBar Unit Tests</title>
+	<script src="../bower_components/closure-library/closure/goog/base.js"></script>
+	<script src="deps-test.js"></script>
+	<script>
+		goog.require('goog.testing.jsunit');
+		goog.require('goog.testing.events');
+		goog.require('bootstrap3.NavBar');
+		goog.require('goog.dom');
+		goog.require('goog.events');
+		goog.require('goog.object');
+	</script>
+	<link type="text/css" rel="stylesheet" href="../dist/css/closure-bootstrap.css"/>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<nav id="topNavBar" class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Brand</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+		
+	<div id="content">Content goes here</div>
+  
+	<div id="bottomNavBar" class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Bottom Nav</a>
+		</div>
+			<!--  <p class="navbar-text pull-right">
+				Signed in as 
+			<a href="#" class="navbar-link">Mark Otto</a>
+			</p>
+		<form class="navbar-form pull-left"></form>
+		<button type="button" class="btn btn-default navbar-btn">Sign in</button>
+		-->
+		<ul class="nav navbar-nav navbar-right">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Link</a></li>
+			<li><a href="#">Link</a></li>
+		</ul>
+	</div>
+	</div>
+
+<script>
+var topNavBar, bottomNavBar;
+
+function setUp() {
+	topNavBar = new bootstrap3.NavBar();
+	bottomNavBar = new bootstrap3.NavBar();
+}
+
+function tearDown() {
+//	topNavBar.dispose();
+//	bottomNavBar.dispose();
+//	goog.events.removeAll();
+}
+
+function testDecorateNavBar() {
+	topNavBar.decorate( goog.dom.getElement('topNavBar') );
+	bottomNavBar.decorate( goog.dom.getElement('bottomNavBar') );
+	
+	//topNavBar.getElement().style.setProperty('width', '760px'); 
+	//bottomNavBar.getElement().style.setProperty('width', '760px');
+	
+	/* Not sure why this doesn't work...
+	var toggle = goog.dom.getElementByClass('navbar-toggle', bottomNavBar.getElement());
+	goog.testing.events.fireClickEvent( toggle ); */
+//	bottomNavBar.getChildAt(0).setOpen(true);
+}
+</script>
+</body>
+</html>
