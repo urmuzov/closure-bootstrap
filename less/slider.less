@@ -1,13 +1,31 @@
 // adapted from Bootstrap's .progress
 
 @slider-width: 200px;
+@slider-thumb-width: 28px;
 
 .slider-group {
+	width: @slider-width;
+
 	.hint {
-		margin-top: 3px;
+		margin-top: 7px;
 		text-align: center;
 	}
+
+  	&.slider-range .tooltip {
+	  margin-top: -16px;
+	}
+
+	.tooltip {
+	  margin-top: -42px;
+	  width: @slider-thumb-width;
+	  text-align: center;
+
+	  .tooltip-inner {
+		padding: 3px;
+	  }
+	}
 }
+
 
 input[type='range'] {
 	-webkit-appearance: none;
@@ -39,7 +57,7 @@ input[type='range'] {
 }
 
 .slider {
-	width: @slider-width;
+    width: @slider-width;
 
 	div& {
 		.slider-track();
@@ -55,8 +73,7 @@ input[type='range'] {
 	}
 
 	.slider-handle {
-		top: -6px;
-		cursor: default;
+		top: -10px;
 		position: absolute;
 
 		.slider-thumb;
@@ -72,8 +89,11 @@ input[type='range'] {
 }
 
 .slider-thumb() {
-	width: 20px;
-	height: 20px;
+    cursor: pointer;
+	width: @slider-thumb-width;
+	height: @slider-thumb-width;
+  	line-height: 27px;
+  	text-align: center;
 	background-color: lighten(@component-active-bg, 10%);
 	border: 1px solid @component-active-bg;
 	border-radius: @border-radius-base;

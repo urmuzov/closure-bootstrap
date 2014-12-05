@@ -59,7 +59,7 @@
 
 	<h2>Range Slider with Hint</h2>
 	<div class="container">
-		<div class="form-group">
+		<div>
 			<label class="control-label col-sm-2" for="my_slider4">Rating</label>
 			<div class="col-sm-10" id="slider4">
 				<input type="range" class="form-control" value="50" name="my_slider4" id="my_slider4">
@@ -87,8 +87,8 @@ var slider1, slider2, slider3, slider4, slider5;
 function setUp() {
 	slider1 = new bootstrap3.Slider();
 	slider2 = new bootstrap3.Slider();
-	slider3 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"} );
-	slider4 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"} );
+	slider3 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"}, true );
+	slider4 = new bootstrap3.Slider( {0:"Bad for slider 4", 50:"Good for slider 4", 100:"Great for slider 4"}, true );
 	slider5 = new bootstrap3.Slider( {0:"Bad", 50:"Good", 100:"Great"} );
 }
 
@@ -97,16 +97,20 @@ function tearDown() {
 
 function testDecorateSimpleSlider() {
 	slider1.decorate(goog.dom.getElement('slider1'));
+	assertEquals(null, slider1.getTextValue());
 }
 function testDecorateSimpleRangeSlider() {
 	slider2.decorate(goog.dom.getElement('slider2'));
+	assertEquals(null, slider2.getTextValue());
 }
 function testDecorateSliderWithHint() {
 	slider3.decorate(goog.dom.getElement('slider3'));
 	slider3.getElement().focus();
+	assertEquals('Good', slider3.getTextValue());
 }
 function testDecorateRangeSliderWithHint() {
 	slider4.decorate(goog.dom.getElement('slider4'));
+	assertEquals('Good for slider 4', slider4.getTextValue());
 }
 function testDecorateVerticalSlider() {
 	slider5.setOrientation(goog.ui.SliderBase.Orientation.VERTICAL);

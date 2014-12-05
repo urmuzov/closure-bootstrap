@@ -57,12 +57,14 @@ bootstrap3.slider.Legend;
 /**
  * This creates a slider object.
  * @param {bootstrap3.slider.Legend=} legend
+ * @param {boolean=} opt_mapValueToDescription - if true screen readers would read the label, not the numeric value
  * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper.
  * @constructor
  * @extends {goog.ui.SliderBase}
  */
-bootstrap3.Slider = function( legend, opt_domHelper ) {
-	goog.ui.SliderBase.call(this, opt_domHelper);
+bootstrap3.Slider = function( legend, opt_mapValueToDescription, opt_domHelper ) {
+	goog.ui.SliderBase.call(this, opt_domHelper,
+		opt_mapValueToDescription ? bootstrap3.Slider.prototype.getLabel : goog.functions.NULL);
 //	this.rangeModel.setExtent(0);
 
 	/**
@@ -88,11 +90,13 @@ bootstrap3.Slider.prototype.inputElement;
 bootstrap3.Slider.prototype.decorateInternal = function(element) {
 
 	//read initial values from markup and remove the text, initialising the slider
-	var value;
+	var value,
+		wrapperEl = element;
 	if( element.value !== undefined ) {
 		// decorating the <input type="hidden/range"> directly
 		value = element.value;
 		this.inputElement = element;
+		wrapperEl = element.parentElement;
 	} else {
 		this.inputElement = element.getElementsByTagName('input')[0];
 
@@ -116,15 +120,26 @@ bootstrap3.Slider.prototype.decorateInternal = function(element) {
 
 	//(may need to restore this if we use the component registry) this.legend_ = this.legendSet_[d.id].legend;
 
+	this.tooltip = this.createTooltip_();
+	if (this.tooltip) {
+		goog.dom.insertChildAt(wrapperEl, this.tooltip, 0);
+		//element.appendChild(this.tooltip);
+		goog.dom.classes.set( wrapperEl,
+			this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL ? 'slider-group-vertical' : 'slider-group' );
+	}
+
 	if( this.inputElement.type == 'range' ) {
 		if( valueDiv ) {
 			goog.style.showElement( valueDiv, false );
 		}
+		this.tooltipTarget = this.inputElement;
 		goog.dom.classes.set( this.inputElement, 'form-control ' + bootstrap3.Slider.CSS_CLASS_PREFIX );
+		goog.dom.classes.add( wrapperEl, 'slider-range' );
 		goog.ui.Component.prototype.decorateInternal.call(this, valueDiv || element);
 	} else {
 		// If the HTML tries to create a range input in an old browser, it will end up as a text input control.
 		this.inputElement.type = 'hidden';	// this doesn't work on Firefox: goog.style.showElement( this.inputElement, false );
+		this.tooltipTarget = element;
 		goog.dom.classes.set( valueDiv, bootstrap3.Slider.CSS_CLASS_PREFIX );
 		bootstrap3.Slider.superClass_.decorateInternal.call(this, valueDiv);
 	}
@@ -151,11 +166,19 @@ bootstrap3.Slider.prototype.enterDocument = function() {
 	// rather than call addEventListner(), use getHandler.listen() as the Component base class will call removeAll() in exitDocument() 
 	//this.addEventListener(goog.ui.Component.EventType.CHANGE, function() {
 	var target = (this.inputElement.type == 'range') ? this.inputElement : this;
-	this.getHandler().listen( target, goog.ui.Component.EventType.CHANGE, function(event) {
+	this.getHandler().listen( target, ['input', goog.ui.Component.EventType.CHANGE], function(event) {
 		var value = (event.target == this) ? this.getValue() : parseInt(event.target.value);
 		this.setRatingValue( value );
 //		this.setValue( value );
 	});
+
+	if (this.tooltip) {
+		this.getHandler().listen(this.tooltipTarget, goog.events.EventType.MOUSEOVER, function(e) {
+			this.tooltip.style.opacity = 1;
+		}).listen(this.tooltipTarget, goog.events.EventType.MOUSEOUT, function(e) {
+			this.tooltip.style.opacity = 0;
+		});
+	}
 };
 
 
@@ -204,33 +227,41 @@ bootstrap3.Slider.prototype.createThumbs = function() {
  */
 bootstrap3.Slider.prototype.createThumb_ = function() {
 	var thumb = this.getDomHelper().createDom('div', bootstrap3.Slider.THUMB_CSS_CLASS);
-	goog.a11y.aria.setRole(thumb, goog.a11y.aria.Role.BUTTON);
+//	goog.a11y.aria.setRole(thumb, goog.a11y.aria.Role.SLIDER);
 	return /** @type {HTMLDivElement} */ (thumb);
 };
 
+bootstrap3.Slider.prototype.createTooltip_ = function() {
+	var dom = this.getDomHelper(),
+		tooltip = dom.createDom('div',
+			this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL ? 'tooltip left' : 'tooltip top',
+			dom.createDom('div', 'tooltip-arrow'),
+			dom.createDom('div', 'tooltip-inner', 'MyToolTip'));
+	return tooltip;
+};
 
 /** @inheritDoc */
-bootstrap3.Slider.prototype.getThumbCoordinateForValue_ = function(val) {
+bootstrap3.Slider.prototype.getThumbCoordinateForValue = function(val) {
 	var coord = new goog.math.Coordinate;
 
-	if (this.valueThumb) {
+	//if (this.valueThumb) {
 		var min = this.getMinimum();
 		var max = this.getMaximum();
 		// This check ensures the ratio never take NaN value, which is possible when
 		// the slider min & max are same numbers (i.e. 1).
-		var ratio = (val == min && min == max) ? 0 : (val - min) / (max - min);
+		var ratio = (val == min && min == max) ? 0 : (val - min) / (max - min),
+			thumbSize = this.valueThumb ? this.valueThumb.offsetHeight : 28;
 
-//		if (this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL) {
-//			var thumbHeight = this.valueThumb.offsetHeight;
-//			var h = this.getElement().clientHeight - thumbHeight;
-//			var bottom = Math.round(ratio * h);
-//			coord.y = h - bottom;
-//		} else {
-		var w = this.getElement().clientWidth; // - this.valueThumb.offsetWidth;
-		var left = Math.round(ratio * w);
-		coord.x = left;
-//		}
-	}
+		if (this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL) {
+			var h = this.getElement().clientHeight - thumbSize;
+			var bottom = Math.round(ratio * h);
+			coord.y = h - bottom;
+		} else {
+			var w = this.getElement().clientWidth - thumbSize;
+			var left = Math.round(ratio * w);
+			coord.x = left;
+		}
+//	}
 	return coord;
 };
 
@@ -248,38 +279,69 @@ bootstrap3.Slider.prototype.setValue = function( value ) {
  * @param {number} value - the integer value for the slider and hidden <input>
  */
 bootstrap3.Slider.prototype.setRatingValue = function( value ) {
-	var parentEl = this.getElement().parentElement,	// The row containing <p class="hint">,	<input type="text"> and <input type="hidden">
-		hint;
+	var parentEl = this.getElement().parentElement;	// The row containing <p class="hint">,	<input type="text"> and <input type="hidden">
 
-	if( parentEl.className == 'slider' ) { // .tagName.toUpperCase() == 'TD' ) {
+	goog.a11y.aria.setState(this.getElement(), 'valuenow', value);
+
+	if (parentEl.className == 'slider') { // .tagName.toUpperCase() == 'TD' ) {
 		parentEl = parentEl.parentElement;
 	}
 
-	var hintP = goog.dom.getElementByClass('hint', parentEl);
-	if( hintP ) {
-		if( this.legend_ != null ) {
-			// Test at http://jsperf.com/for-in-object indicates that for best performance:
-			// 'for( Object.keys(data) )' is best for Chrome, otherwise, 'for var in'
-			for( var i in this.legend_ ) {
-				if( i > value ) { break; }
-				hint = this.legend_[/** @type {number} */(i)];
-			}
-		}
+	var hintP = goog.dom.getElementByClass('hint', parentEl),
+		hint = this.getLabel(value);
 
-		value += '';	// by far, the most efficient way to cast number to string. @see http://jsperf.com/number-to-string3
-		if( hint ) {
-			//var text = goog.dom.getRawTextContent( hintP );
-			var text = bootstrap3.utils.getElementsByTagNameAndAttribute('input', 'type', 'text', parentEl)[0];
-			if( goog.isDef(text) ) {
-				text.setAttribute('placeholder', hint);
-			} // else
-			goog.dom.setTextContent( hintP, value + ': ' + hint );
+	if (hint) {
+		var text = bootstrap3.utils.getElementsByTagNameAndAttribute('input', 'type', 'text', parentEl)[0];
+		if( goog.isDef(text) ) {
+			text.setAttribute('placeholder', hint);
+		} // else
+	}
 
+	if (hintP) {
+		//value += '';	// by far, the most efficient way to cast number to string. @see http://jsperf.com/number-to-string3
+		goog.dom.setTextContent( hintP,
+								hint == null ? value :
+									this.tooltip === null ?
+										value + ': ' + hint : hint);
+	} else if(hint) {
+		value += ': ' + hint;
+	}
+
+	if (this.tooltip) {
+		var tooltipInner = goog.dom.getElementByClass('tooltip-inner', this.tooltip),
+			thumbCoords = this.getThumbCoordinateForValue(value);
+		tooltipInner.innerHTML = value;
+
+		if (this.orientation_ == goog.ui.SliderBase.Orientation.VERTICAL) {
+			this.tooltip.style['margin-top'] = thumbCoords.y + 4 + 'px';
 		} else {
-			goog.dom.setTextContent( hintP, value );
+			this.tooltip.style['margin-left'] = thumbCoords.x + 'px';
 		}
 	}
 
 	//goog.dom.setTextContent( this.inputElement, value );
 	this.inputElement.value = value;
 };
+
+/**
+ * @param {number} value
+ * @return {?string}
+ */
+bootstrap3.Slider.prototype.getLabel = function(value) {
+	var label = null;
+	if( this.legend_ != null ) {
+		// Test at http://jsperf.com/for-in-object indicates that for best performance:
+		// 'for( Object.keys(data) )' is best for Chrome, otherwise, 'for var in'
+
+		for( var i in this.legend_ ) {
+			if( i > value ) { break; }
+			label = this.legend_[/** @type {number} */(i)];
+		}
+	}
+	return label;
+};
+
+//bootstrap3.Slider.prototype.handleBeforeDrag_ = function(e) {
+//	goog.ui.SliderBase.prototype.handleBeforeDrag_.call(this, e);
+//	this.tooltip.style.opacity = 1;
+//};
